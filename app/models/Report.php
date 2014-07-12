@@ -19,4 +19,7 @@ class Report extends Eloquent {
 	 */
 	
 
+
+	
+
 }

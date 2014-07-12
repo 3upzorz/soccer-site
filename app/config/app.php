@@ -15,6 +15,7 @@ return array(
 
 	'debug' => true,
 
+
 	/*
 	|--------------------------------------------------------------------------
 	| Application URL
@@ -78,7 +79,10 @@ return array(
 	|
 	*/
 
+
 	'key' => 'JUfmM0SCz5P4DpJCuZmkilJWp69gnBix',
+
+
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
