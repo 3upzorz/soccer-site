@@ -45,6 +45,13 @@ class HomeController extends BaseController {
 
 	public function registerView(){
 
+		$userType = Auth:user()->type;
+
+		//call type model, grab user types this user can create
+
+		//assign to $data array
+
+		//pass data array
 		return View::make("register");
 
 	}
@@ -53,6 +60,15 @@ class HomeController extends BaseController {
 
 		$email = Input::get("email");
 		$password = Input::get("password");
+		$type = Input::get("type");
+
+		//get user type
+		$userType = Auth::user()->type;
+
+		//if use is superuser allow all
+		//if user is admin allow create ref
+
+			
 
 		$user = new User();
 
@@ -73,11 +89,31 @@ class HomeController extends BaseController {
 
 		$report = new Report();
 
-		$field = Input::get("field");
+		$home = Input::get("home");
+		$away = Input::get("away");
+		$timeOfMatch = Input::get("time_of_match");
+		$status = Input::get("status");
+		$comments = Input::get("comments");
+		$refereeRole = Input::get("referee_role");
+
+		$incidents = Input::get("incidents");
+
+		//create report
 
 		$report->user_id = Auth::id();
-		$report->field = $field;
+		$report->home = $home;
+		$report->away = $away;
+		$report->time_of_match = $timeOfMatch;
+		$report->status = $status;
+		$report->comments = $comments;
+		$report->refereeRole = $refereeRole;
+		$report->incidents = $incidents;
 		$report->save();
+
+		//loop through incidents and assiign to current report
+		foreach($incidents as $incident){
+			$report->attach($incident['id'],array("comments" => $incident['comments']));
+		}
 
 		return true;
 	}
