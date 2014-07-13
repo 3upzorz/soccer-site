@@ -16,7 +16,12 @@ class CreateReportsTable extends Migration {
 		{	
 			$table->increments("id");
 			$table->integer("user_id");
-			$table->string("field");
+			$table->string("home");
+			$table->string("away");
+			$table->timestamp("time_of_match");
+			$table->string("status");
+			$table->integer("referee_role_id");
+			$table->text("comments");
 			$table->softDeletes();
 			$table->timestamps();
 		});
