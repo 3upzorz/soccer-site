@@ -23,7 +23,7 @@ class HomeController extends BaseController {
 
 	public function loginView(){
 
-		return View::make("login");
+		return View::make("login", array('title' => 'PCSA - Login'));
 
 	}
 

@@ -13,7 +13,7 @@
 
 Route::get('/', function()
 {
-	return View::make('login');
+	return View::make('login', array('title' => 'PCSA - Login'));
 });
 
 
