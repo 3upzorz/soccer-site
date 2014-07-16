@@ -4,10 +4,12 @@
 	<meta charset="UTF-8">
 	{{HTML::style('css/bootstrap-theme.min.css')}}
 	{{HTML::style('css/bootstrap.min.css')}}
+	{{HTML::style('css/containers.css')}}
+	{{HTML::style('css/components.css')}}
 	@if(isset($title))
 		<title>{{$title}}</title>
 	@else
-		<title>Po Co Soccer Association</title>
+		<title>Port Coquitlam Soccer Association</title>
 	@endif
 </head>
 <body>
@@ -40,5 +42,6 @@
 
 	{{HTML::script('js/jquery-1.11.1.min.js')}}
 	{{HTML::script('js/bootstrap.min.js')}}
+	{{HTML::script('js/soccer-site.js')}}
 </body>
 </html>
