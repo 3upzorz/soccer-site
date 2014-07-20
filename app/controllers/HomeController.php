@@ -121,6 +121,7 @@ class HomeController extends BaseController {
 	public function showReport($report_id){
 
 		$data['report'] = Report::find($report_id);
+		$data['incidents'] = $data['report']->Incidents();
 
 		return View::make("show_report",$data);
 	}
