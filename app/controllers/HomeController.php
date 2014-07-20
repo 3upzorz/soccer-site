@@ -23,7 +23,7 @@ class HomeController extends BaseController {
 
 	public function loginView(){
 
-		return View::make("login");
+		return View::make("login", array('title' => 'PCSA - Login'));
 
 	}
 
@@ -45,7 +45,7 @@ class HomeController extends BaseController {
 
 	public function registerView(){
 
-		$userType = Auth:user()->type;
+		$userType = Auth::user()->type;
 
 		//call type model, grab user types this user can create
 
@@ -81,7 +81,7 @@ class HomeController extends BaseController {
 
 	public function createReportView(){
 
-		return View::make("create_report");
+		return View::make("create-report", array('title' => 'PCSA - Create Report'));
 
 	}
 
