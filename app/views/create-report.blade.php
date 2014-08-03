@@ -23,10 +23,33 @@
 						</div>
 					</div>
 					<div class="row">
+						<div class="col-xs-6">
+							<div class="form-group">
+								<label for="game-date">Date (dd/mm/yyyy)</label>
+								<input type="text" class="form-control" id="game-date" name="gameDate">
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="form-group">
+								<label for="game-time">Time</label>
+								<input type="text" class="form-control" id="game-time" name="gameTime">
+							</div>
+						</div>
+					</div>
+					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group">
-								<label for="duty">Your Duty</label>
+								<label for="field">Field</label>
+								<input type="text" placeholder="Field Name" id="field" class="form-control" name="field"/>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="ref-type">Your Duty</label>
 								<select class="form-control" id="ref-type" name="refType">
+									<option val="def" selected disabled>Select your role</option>
 									<option val="center">Center</option>
 									<option val="assistant">Assistant</option>
 								</select>

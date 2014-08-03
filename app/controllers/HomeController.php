@@ -86,6 +86,12 @@ class HomeController extends BaseController {
 	}
 
 	public function createReport(){
+		//TODO REMOVE
+		$input = Input::all();
+		echo '<pre>';
+		var_dump($input);
+		echo '</pre>';
+		die();
 
 		$report = new Report();
 

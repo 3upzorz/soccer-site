@@ -1,0 +1,28 @@
+/**
+ * Create reports page
+ */
+
+ #add-issue-btn{
+
+ 	width: 100%;
+	background-color: #fff;
+	border: 3px dashed #ccc;
+	border-radius: 3px;
+	color:#ccc;
+	font-size:12px;
+	text-shadow:none;
+	padding: 6px 12px;
+ }
+
+ #add-issue-btn:hover{
+ 	border-color:#ACACAC;
+ 	color:#ACACAC;
+ }
+
+ #add-issue-btn:active{
+ 	/*background:;*/
+ }
+
+ #add-issue-btn:focus{
+ 	outline:none;
+ }
