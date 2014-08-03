@@ -10,7 +10,10 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				{{Form::open(array('report/create'))}}
+				{{Form::open(array(
+								'url' => 'report/create',
+								'id' => 'create-report-form'
+							))}}
 					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group">
@@ -102,12 +105,12 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<button id="add-issue-btn" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span></button>
+							<button id="add-issue-btn" class="" type="button"><span class="glyphicon glyphicon-plus"></span> Add Issue</button>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<button id="create-report-submit-btn" class="btn btn-success" type="submit">Create Report</button>
+							<button id="create-report-submit-btn" form="create-report-form" class="btn btn-success" type="submit">Create Report</button>
 						</div>
 					</div>
 				</form>
