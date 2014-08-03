@@ -5,6 +5,8 @@
 {{HTML::style('css/bootstrap-theme.min.css')}}
 {{HTML::style('css/bootstrap.min.css')}}
 {{HTML::style('css/containers.css')}}
+{{HTML::style('css/components.css')}}
+{{HTML::style('css/skins.css')}}
 <title>PCSA - Login</title>
 </head>
 <body>

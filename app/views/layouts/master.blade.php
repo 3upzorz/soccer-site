@@ -6,6 +6,7 @@
 	{{HTML::style('css/bootstrap.min.css')}}
 	{{HTML::style('css/containers.css')}}
 	{{HTML::style('css/components.css')}}
+	{{HTML::style('css/skins.css')}}
 	@if(isset($title))
 		<title>{{$title}}</title>
 	@else

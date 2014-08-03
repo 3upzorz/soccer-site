@@ -31,3 +31,5 @@ Route::get('register', array('as' => 'register_view', 'uses' => 'HomeController@
 
 Route::get('report/create', array('as' => 'create_report_view', 'uses' => 'HomeController@createReportView'));
 
+Route::get('test', array('uses' => 'HomeController@test'));
+

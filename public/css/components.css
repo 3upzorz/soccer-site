@@ -2,5 +2,17 @@
  * Create report page
  */
 #add-issue-btn{
-	float:right;
+}
+
+#create-report-submit-btn{
+	margin:15px 0px;
+	float:right;	
+}
+
+.no-padding-left{
+	padding-left:0px;
+}
+
+.no-padding-right{
+	padding-right:0px;
 }

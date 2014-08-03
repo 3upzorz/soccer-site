@@ -125,4 +125,9 @@ class HomeController extends BaseController {
 		return View::make("show_report",$data);
 	}
 
+	// public function test(){
+
+	// 	echo Hash::make("test");
+	// }
+
 }
