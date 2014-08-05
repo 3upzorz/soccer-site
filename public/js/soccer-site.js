@@ -1,7 +1,7 @@
 //on document ready
 $(function(){
 	/**
-	 * Create report page
+	 * report create page
 	 */
 
 	//Add a new issue input to page
@@ -50,6 +50,59 @@ $(function(){
 	}).on('changeDate',function(){
 		//hide datepicker when date is picked
 		$(this).datepicker('hide');
+		//remove error class if it is applied
+		$(this).removeClass('error');
+		$('#game-date-error').hide();
+	});
+
+	//Initialize timepicker
+	$('#game-time').timepicker({
+		minuteStep:5
+	});
+
+	//add validator method to check that input time is a time string
+	$.validator.addMethod("timeString", function(value, element){
+		return this.optional(element) || /^((1[0-2])|(0?[0-9]))\:[0-5][0-9] ((AM)|(PM))$/.test(value);
+	},"Please enter a valid time (HH:MM AM/PM)");
+
+	//add validator method to check that input date is a date string using format dd/mm/yyyy
+	$.validator.addMethod("dateString", function(value, element){
+		return this.optional(element) || /^((0?[1-9])|([1-2][0-9])|(3[0-1]))\/((1[0-2])|(0?[1-9]))\/[0-9]{4}$/.test(value);
+	},"Please enter a valid date");
+
+	//add a validator method to check the select value is not default
+	$.validator.addMethod("notDefault", function(value, element){
+		return this.optional(element) || value != 'def'
+	},"Please select an option");
+
+	//Initalize form validation
+	$('#create-report-form').validate({
+		rules:{
+			gameNumber:"required",
+			gameDate:{
+				required:true,
+				dateString:true
+			},
+			gameTime:{
+				required:true,
+				timeString:true
+			},
+			field:"required",
+			refType:{
+				required:true,
+				notDefault:true
+			},
+			homeName:"required",
+			homeScore:{
+				required:true,
+				min:0
+			},
+			awayName:"required",
+			awayScore:{
+				required:true,
+				min:0
+			}
+		}
 	});
 
 	//Hide datepicker when tab pressed

@@ -27,12 +27,20 @@
 							<div class="form-group">
 								<label for="game-date">Date (dd/mm/yyyy)</label>
 								<input type="text" class="form-control" id="game-date" name="gameDate">
+								<!-- <div class="input-group">
+						            <input id="game-date" type="text" class="form-control" name="gameDate">
+						            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+						        </div> -->
 							</div>
 						</div>
 						<div class="col-xs-6">
 							<div class="form-group">
 								<label for="game-time">Time</label>
-								<input type="text" class="form-control" id="game-time" name="gameTime">
+								<input id="game-time" type="text" class="form-control" name="gameTime">
+								<!-- <div class="input-group">
+						            <input id="game-time" type="text" class="form-control" name="gameTime">
+						            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+						        </div> -->
 							</div>
 						</div>
 					</div>
