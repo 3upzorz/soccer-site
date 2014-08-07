@@ -6,28 +6,54 @@ label.error{
 	color:red;
 }
 
+#content{
+	border: 1px solid rgb(124, 124, 124);
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	box-shadow: 10px 20px 10px grey;
+}
+
 /**
  * Create reports page
  */
 
 #add-issue-btn{
 
-	width: 100%;
 	background-color: #fff;
-	border: 3px dashed #ccc;
+	border: 3px dashed #ACACAC;
 	border-radius: 3px;
-	color:#ccc;
+	color:#ACACAC;
 	font-size:12px;
 	text-shadow:none;
-	padding: 6px 12px;
 }
 
 #add-issue-btn:hover{
-	border-color:#ACACAC;
-	color:#ACACAC;
+	border-color:#888;
+	color:#888;
 }
 
 
 #add-issue-btn:focus{
 	outline:none;
+}
+
+/**
+ * Search Reports page
+ */
+
+.search-controls{
+
+	border-bottom:1px solid #CCC;
+}
+
+.red{
+	background:rgb(214, 65, 65);
+}
+
+.yellow{
+	background:rgb(255, 255, 103);
+}
+
+.flag{
+	border:1px solid black;
 }

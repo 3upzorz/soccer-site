@@ -2,7 +2,7 @@
  * Global
  */
 #content{
-	max-width: 700px;
+	max-width:900px;	
 }
 
 /**
@@ -12,4 +12,22 @@
 	max-width:700px;
 	text-align: center;
 	margin:auto;
+}
+
+/**
+ * Create Report page
+ */
+
+/**
+ * Search Report page
+ */
+.search-controls{
+
+	padding-bottom:10px;
+}
+
+.flag-list{
+
+	padding:0px;
+	margin:0px;
 }

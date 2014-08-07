@@ -1,7 +1,7 @@
 //on document ready
 $(function(){
 	/**
-	 * report create page
+	 * REPORT CREATE PAGE
 	 */
 
 	//Add a new issue input to page
@@ -114,4 +114,31 @@ $(function(){
 			$(this).datepicker('hide');
 		} 
 	});
+
+	/**
+	 * END REPORT CREATE PAGE
+	 */
+
+	/**
+	 * SEARCH REPORT PAGE
+	 */
+
+	//Initalize datepicker
+	$('#search-game-date').datepicker({
+		format:'dd/mm/yyyy'
+	}).on('changeDate',function(){
+		//hide datepicker when date is picked
+		$(this).datepicker('hide');
+		//remove error class if it is applied
+		$(this).removeClass('error');
+		$('#search-game-date-error').hide();
+	});
+
+	//Initialize timepicker
+	$('#search-game-time').timepicker({
+		minuteStep:5
+	});
+	/**
+	 * END SEARCH REPORT PAGE
+	 */
 });

@@ -14,9 +14,22 @@
  * Create report page
  */
 #add-issue-btn{
+	width:100%;
+	padding:6px 12px;
 }
 
 #create-report-submit-btn{
 	margin:15px 0px;
 	float:right;	
+}
+
+/**
+ * Search Report page
+ */
+.flag{
+	width:25px;
+	height:15px;
+	display:inline-block;
+	/*margin-right: 3px;*/
+	vertical-align: middle;
 }

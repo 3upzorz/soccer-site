@@ -27,6 +27,11 @@ class HomeController extends BaseController {
 
 	}
 
+	public function searchView(){
+
+		return View::make('search-reports', array('title' => 'PCSA - Report Search'));
+	}
+
 	public function login(){
 
 		$email = Input::get("email");
