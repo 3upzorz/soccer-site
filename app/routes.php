@@ -21,7 +21,7 @@ Route::post('register', array('as' => 'registeer', 'uses' => 'HomeController@reg
 
 Route::post('login', array('as' => 'login', 'uses' => 'HomeController@login'));
 
-Route::post('report/create', array('as' => 'create_report', 'uses' => 'HomeController@createReport'));
+Route::post('report/create', array('as' => 'create_report', 'uses' => 'ReportController@createReport'));
 
 Route::get('showReport/{id}', array('as' => 'show_report', 'uses' => 'HomeController@showReport/{id}'));
 
