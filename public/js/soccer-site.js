@@ -76,34 +76,35 @@ $(function(){
 	},"Please select an option");
 
 	//Initalize form validation
-	$('#create-report-form').validate({
-		rules:{
-			gameNumber:"required",
-			gameDate:{
-				required:true,
-				dateString:true
-			},
-			gameTime:{
-				required:true,
-				timeString:true
-			},
-			field:"required",
-			refType:{
-				required:true,
-				notDefault:true
-			},
-			homeName:"required",
-			homeScore:{
-				required:true,
-				min:0
-			},
-			awayName:"required",
-			awayScore:{
-				required:true,
-				min:0
-			}
-		}
-	});
+	//TODO uncommented for testing
+	// $('#create-report-form').validate({
+	// 	rules:{
+	// 		gameNumber:"required",
+	// 		gameDate:{
+	// 			required:true,
+	// 			dateString:true
+	// 		},
+	// 		gameTime:{
+	// 			required:true,
+	// 			timeString:true
+	// 		},
+	// 		field:"required",
+	// 		refType:{
+	// 			required:true,
+	// 			notDefault:true
+	// 		},
+	// 		homeName:"required",
+	// 		homeScore:{
+	// 			required:true,
+	// 			min:0
+	// 		},
+	// 		awayName:"required",
+	// 		awayScore:{
+	// 			required:true,
+	// 			min:0
+	// 		}
+	// 	}
+	// });
 
 	//Hide datepicker when tab pressed
 	$(document).on('keydown', '#game-date', function(e) { 
