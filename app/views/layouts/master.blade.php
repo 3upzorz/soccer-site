@@ -4,8 +4,11 @@
 	<meta charset="UTF-8">
 	{{HTML::style('css/bootstrap-theme.min.css')}}
 	{{HTML::style('css/bootstrap.min.css')}}
+	{{HTML::style('css/datepicker.css')}}
+	{{HTML::style('css/bootstrap-timepicker.min.css')}}
 	{{HTML::style('css/containers.css')}}
 	{{HTML::style('css/components.css')}}
+	{{HTML::style('css/skins.css')}}
 	@if(isset($title))
 		<title>{{$title}}</title>
 	@else
@@ -42,6 +45,9 @@
 
 	{{HTML::script('js/jquery-1.11.1.min.js')}}
 	{{HTML::script('js/bootstrap.min.js')}}
+	{{HTML::script('js/bootstrap-datepicker.js')}}
+	{{HTML::script('js/bootstrap-timepicker.js')}}
+	{{HTML::script('js/jquery.validate.js')}}
 	{{HTML::script('js/soccer-site.js')}}
 </body>
 </html>

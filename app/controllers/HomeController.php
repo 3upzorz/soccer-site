@@ -27,6 +27,11 @@ class HomeController extends BaseController {
 
 	}
 
+	public function searchView(){
+
+		return View::make('search-reports', array('title' => 'PCSA - Report Search'));
+	}
+
 	public function login(){
 
 		$email = Input::get("email");
@@ -86,6 +91,12 @@ class HomeController extends BaseController {
 	}
 
 	public function createReport(){
+		//TODO REMOVE
+		$input = Input::all();
+		echo '<pre>';
+		var_dump($input);
+		echo '</pre>';
+		die();
 
 		$report = new Report();
 
@@ -125,5 +136,10 @@ class HomeController extends BaseController {
 
 		return View::make("show_report",$data);
 	}
+
+	// public function test(){
+
+	// 	echo Hash::make("test");
+	// }
 
 }
