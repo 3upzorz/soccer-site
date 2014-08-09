@@ -12,7 +12,7 @@ class CreateRefereeRolesTable extends Migration {
 	 */
 	public function up()
 	{
-			Schema::create('referee_roles', function($table)
+			Schema::create('ref_types', function($table)
 		{
 
 			$table->increments("id");

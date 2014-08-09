@@ -97,41 +97,56 @@ class ReportController extends BaseController {
 
 	public function createReport(){
 		//TODO REMOVE
-		$input = Input::all();
-		echo '<pre>';
-		var_dump($input);
-		echo '</pre>';
-		die();
+		// $input = Input::all();
+		// echo '<pre>';
+		// var_dump($input);
+		// echo '</pre>';
+		// die();
+
+
+
 
 		$report = new Report();
 
-		$home = Input::get("home");
-		$away = Input::get("away");
-		$timeOfMatch = Input::get("time_of_match");
-		$status = Input::get("status");
+		$gameNumber = Input::get("gameNumber");
+		$gameDate = Input::get("gameDate");
+		$gameTime = Input::get("gameTime");
+		$field = Input::get("field");
+		$homeName = Input::get("homeName");
+		$homeScore = Input::get("homeScore");
+		$awayName = Input::get("awayName");
+		$awayScore = Input::get("awayScore");
 		$comments = Input::get("comments");
-		$refereeRole = Input::get("referee_role");
+		$division = Input::get("division");
+		$refType = Input::get("refType");
 
 		$incidents = Input::get("incidents");
 
 		//create report
 
-		$report->user_id = Auth::id();
-		$report->home = $home;
-		$report->away = $away;
-		$report->time_of_match = $timeOfMatch;
-		$report->status = $status;
+		$report->user_id = 1;//Auth::id();
+		$report->game_number = $gameNumber;
+		$report->game_date = DateTime::createFromFormat('d/m/Y h:i A', $gameDate . " " . $gameTime)->format('Y-m-d H:i:s');
+		$report->field = $field;
+		$report->home_name = $homeName;
+		$report->home_score = $homeScore;
+		$report->away_name = $awayName;
+		$report->away_score = $awayScore;
 		$report->comments = $comments;
-		$report->refereeRole = $refereeRole;
-		$report->incidents = $incidents;
-		$report->save();
+		$report->ref_type = $refType;
+		$division = Input::get("division");
 
+		$report->save();
+		//die(var_dump($incidents));
 		//loop through incidents and assiign to current report
 		foreach($incidents as $incident){
 			$report->attach($incident['id'],array("comments" => $incident['comments']));
 		}
 
-		return true;
+		//return true;
+
+		echo json_encode(array("success" => true));
+		return 0;
 	}
 
 	public function showReport($report_id){
