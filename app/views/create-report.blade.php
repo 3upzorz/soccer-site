@@ -55,11 +55,23 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group">
+								<label for="division">Division</label>
+								<select class="form-control" id="division" name="division">
+									<option val="def" selected disabled>Select a Division</option>
+									<option val="1">U-15 Girls</option>
+									<option val="2">U-18 Boys</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
 								<label for="ref-type">Your Duty</label>
 								<select class="form-control" id="ref-type" name="refType">
 									<option val="def" selected disabled>Select your role</option>
-									<option val="center">Center</option>
-									<option val="assistant">Assistant</option>
+									<option val="1">Center</option>
+									<option val="2">Assistant</option>
 								</select>
 							</div>
 						</div>
@@ -113,30 +125,30 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<h2>Issues</h2>
+							<h2>Incidents</h2>
 						</div>
 					</div>
 					<div class="row">
-						<div id="issue-container" class="col-md-12" data-issue-count="1">
-							<div class="row issue-row">
+						<div id="incident-container" class="col-md-12" data-incident-count="1">
+							<div class="row incident-row">
 								<div class="col-sm-3 col-xs-4 form-group no-padding-right">
-									<label for="issue-list-1">Select</label>
-									<select class="form-control issue-list" id="issue-list-1" name="issueList[1][issueName]">
-										<option val="def" selected disabled>Select an issue</option>
+									<label for="incident-list-1">Select</label>
+									<select class="form-control incident-list" id="incident-list-1" name="incidents[1][name]">
+										<option val="def" selected disabled>Select an incident</option>
 										<option value="1">Red Card</option>
 										<option value="2">Yellow Card</option>
 									</select>
 								</div>
 								<div class="col-sm-9 col-xs-8 form-group">
 									<label>Description</label>
-									<input class="form-control" id="issue-description-1" name="issueList[1][issueDescription]" placeholder="your issue here..."></input>
+									<input class="form-control" id="incident-description-1" name="incidents[1][description]" placeholder="your incident here..."></input>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<button id="add-issue-btn" class="" type="button"><span class="glyphicon glyphicon-plus"></span> Add Issue</button>
+							<button id="add-incident-btn" class="" type="button"><span class="glyphicon glyphicon-plus"></span> Add incident</button>
 						</div>
 					</div>
 					<div class="row">

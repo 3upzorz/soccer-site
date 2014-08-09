@@ -17,7 +17,7 @@ label.error{
  * Create reports page
  */
 
-#add-issue-btn{
+#add-incident-btn{
 
 	background-color: #fff;
 	border: 3px dashed #ACACAC;
@@ -27,13 +27,13 @@ label.error{
 	text-shadow:none;
 }
 
-#add-issue-btn:hover{
+#add-incident-btn:hover{
 	border-color:#888;
 	color:#888;
 }
 
 
-#add-issue-btn:focus{
+#add-incident-btn:focus{
 	outline:none;
 }
 
