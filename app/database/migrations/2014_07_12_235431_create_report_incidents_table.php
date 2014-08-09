@@ -18,7 +18,7 @@ class CreateReportIncidentsTable extends Migration {
 			$table->increments("id");
 			$table->integer("report_id");
 			$table->integer("incident_id");
-			$type->text("comments");
+			$table->text("description");
 			$table->softDeletes();
 			$table->timestamps();
 		});
