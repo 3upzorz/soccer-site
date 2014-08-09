@@ -19,14 +19,14 @@
 							<div class="row">
 								<div class="col-xs-6 col-sm-3">
 									<div class="form-group">
-										<label for="search-game-date">Date (dd/mm/yyyy)</label>
-										<input type="text" class="form-control" id="search-game-date" name="gameDate">
+										<label for="search-game-number">Game Number</label>
+										<input type="text" class="form-control" id="search-game-number" name="gameNumber">
 									</div>
 								</div>
 								<div class="col-xs-6 col-sm-3">
 									<div class="form-group">
-										<label for="search-game-time">Time</label>
-										<input type="text" class="form-control" id="search-game-time" name="gameTime">
+										<label for="search-game-date">Date (dd/mm/yyyy)</label>
+										<input type="text" class="form-control" id="search-game-date" name="gameDate">
 									</div>
 								</div>
 								<div class="col-xs-6 col-sm-3">

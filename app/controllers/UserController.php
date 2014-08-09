@@ -1,8 +1,12 @@
 <?php
 
-class ReportController extends BaseController {
+class UserController extends BaseController {
 
-	public function addUserShow(){
+	/**
+	 * Makes the add user view
+	 */
+	public function addUserView(){
 
+		return View::make('add-user', array('title' => 'PCSA - Add User'));
 	}
 }

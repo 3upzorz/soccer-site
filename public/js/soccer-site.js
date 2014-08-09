@@ -136,9 +136,9 @@ $(function(){
 	});
 
 	//Initialize timepicker
-	$('#search-game-time').timepicker({
-		minuteStep:5
-	});
+	// $('#search-game-time').timepicker({
+	// 	minuteStep:5
+	// });
 	/**
 	 * END SEARCH REPORT PAGE
 	 */
