@@ -10,7 +10,7 @@ $(function(){
 		e.preventDefault();
 		var n = $('#issue-container').data('issueCount') + 1;
 		$('#issue-container').data('issueCount',n);
-		var row = '<div id="issue-row-'+n+'" class="row issue-row" style="opacity:0;position:relative;margin-left:300px;">' + 
+		var row =   '<div id="issue-row-'+n+'" class="row issue-row" style="opacity:0;position:relative;margin-left:300px;">' + 
 						'<div class="col-sm-3 col-xs-4 form-group no-padding-right">' + 
 							'<label for="issue-list-' + n +  '">Select</label>'+
 							'<select class="form-control issue-list" id="issue-list-'+n+'" name="issueList['+n+'][issueName]"'+n+'">'+
