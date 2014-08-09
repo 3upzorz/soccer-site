@@ -139,9 +139,9 @@ class ReportController extends BaseController {
 		$report->save();
 		//die(var_dump($incidents));
 		//loop through incidents and assiign to current report
-		foreach($incidents as $incident){
-			$report->attach($incident['id'],array("comments" => $incident['comments']));
-		}
+		// foreach($incidents as $incident){
+		// 	$report->attach($incident['name'],array("description" => $incident['description']));
+		// }
 
 		//return true;
 
