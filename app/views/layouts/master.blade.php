@@ -30,8 +30,8 @@
 			<div id="game-report-navbar-collapse" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav navbar-right">
 					<li class="class">{{HTML::link('/', 'Home')}}</li>
-					<li class="class">{{HTML::link('/reports', 'Reports')}}</li>
-					<li class="class">{{HTML::link('/something', 'Something')}}</li>
+					<li class="class">{{HTML::link('/report/create', 'Create')}}</li>
+					<li class="class">{{HTML::link('/report/search', 'Search')}}</li>
 				</ul>
 			</div>
 		</div>

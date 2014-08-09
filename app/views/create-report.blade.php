@@ -121,7 +121,7 @@
 							<div class="row issue-row">
 								<div class="col-sm-3 col-xs-4 form-group no-padding-right">
 									<label for="issue-list-1">Select</label>
-									<select class="form-control issue-list" id="issue-list-1" name="issueList1">
+									<select class="form-control issue-list" id="issue-list-1" name="issueList[1][issueName]">
 										<option val="def" selected disabled>Select an issue</option>
 										<option value="1">Red Card</option>
 										<option value="2">Yellow Card</option>
@@ -129,7 +129,7 @@
 								</div>
 								<div class="col-sm-9 col-xs-8 form-group">
 									<label>Description</label>
-									<input class="form-control" id="issue-description-1" name="issueDescription1" placeholder="your issue here..."></input>
+									<input class="form-control" id="issue-description-1" name="issueList[1][issueDescription]" placeholder="your issue here..."></input>
 								</div>
 							</div>
 						</div>

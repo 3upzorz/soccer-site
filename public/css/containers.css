@@ -5,6 +5,10 @@
 	max-width:900px;	
 }
 
+.table > tbody > tr > td{
+	padding: 20px 8px;
+}
+
 /**
  * Login page
  */

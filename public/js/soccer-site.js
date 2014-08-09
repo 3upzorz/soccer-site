@@ -13,7 +13,7 @@ $(function(){
 		var row = '<div id="issue-row-'+n+'" class="row issue-row" style="opacity:0;position:relative;margin-left:300px;">' + 
 						'<div class="col-sm-3 col-xs-4 form-group no-padding-right">' + 
 							'<label for="issue-list-' + n +  '">Select</label>'+
-							'<select class="form-control issue-list" id="issue-list-'+n+'" name="issueList'+n+'">'+
+							'<select class="form-control issue-list" id="issue-list-'+n+'" name="issueList['+n+'][issueName]"'+n+'">'+
 								'<option val="def" selected disabled>Select an issue</option>'+
 								'<option value="1">Red Card</option>'+
 								'<option value="2">Yellow Card</option>'+
@@ -21,7 +21,7 @@ $(function(){
 						'</div>'+
 						'<div class="col-sm-9 col-xs-8 form-group">'+
 							'<label>Description</label>'+
-							'<input class="form-control" id="issue-description'+n+'" name="issueDescription'+n+'" placeholder="your issue here..."></input>'+
+							'<input class="form-control" id="issue-description'+n+'" name="issueList['+n+'][issueDescription]'+n+'" placeholder="your issue here..."></input>'+
 						'</div>'+
 					'</div>';
 		$('#issue-container').append(row);

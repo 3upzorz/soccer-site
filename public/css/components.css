@@ -30,6 +30,17 @@
 	width:25px;
 	height:15px;
 	display:inline-block;
-	/*margin-right: 3px;*/
 	vertical-align: middle;
+}
+
+/**
+ * Report Page
+ */
+.report-p{
+	padding-left: 5px;
+}
+
+.report-comments{
+	padding-left: 5px;
+	padding-right: 5px;
 }
