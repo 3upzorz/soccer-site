@@ -19,8 +19,12 @@
 }
 
 #create-report-submit-btn{
+	
+}
+
+.form-submit-btn{
+	float:right;
 	margin:15px 0px;
-	float:right;	
 }
 
 /**

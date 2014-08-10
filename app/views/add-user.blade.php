@@ -15,11 +15,11 @@
 					'id' => 'add-user-form'
 				))}}
 					
-					<div class="row">
+					<!-- <div class="row">
 						<div class="col-md-12">
 							<h2>Profile</h2>
 						</div>
-					</div>
+					</div> -->
 					<div class="row">
 						<div class="col-xs-6">
 							<div class="form-group">
@@ -86,6 +86,41 @@
 									<option val="2">Admin</option>
 								</select>
 							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="divisions">Divisions</label>
+								<p>The divisions a user is capable of reffing (ctrl/cmd + click to select multiple)</p>
+								<label class="checkbox-inline">
+									<input type="checkbox" id="divisionsCheckboxAll" class="divisionsCheckbox" name="divisionsCheckbox" value="all"> All
+								</label>
+								<label class="checkbox-inline">
+									<input type="checkbox" id="divisionsCheckboxNone" class="divisionsCheckbox" name="divisionsCheckbox" value="none"> None
+								</label>
+								<!-- <label class="radio-inline">
+									<input type="radio" name="divisionsRadio" id="divisionsRadioNone" value="none"> None
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="divisionsRadio" id="divisionsRadioNone" value="none"> None
+								</label> -->
+								<select multiple id="divisions" class="form-control" name="divisions[]">
+									<option value="1">U-18 Boys Bronze</option>
+									<option value="2">U-18 Girls Silver</option>
+									<option value="3">U-15 Boys Gold</option>
+									<option value="4">U-15 Boys Gold</option>
+									<option value="5">U-15 Boys Gold</option>
+									<option value="6">U-15 Boys Gold</option>
+									<option value="7">U-15 Boys Gold</option>
+									<option value="8">U-15 Boys Gold</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<button id="add-user-btn" class="btn btn-success form-submit-btn" type="submit">Add User</button>
 						</div>
 					</div>
 				{{Form::close()}}

@@ -153,7 +153,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<button id="create-report-submit-btn" form="create-report-form" class="btn btn-success" type="submit">Create Report</button>
+							<button id="create-report-submit-btn" form="create-report-form" class="btn btn-success form-submit-btn" type="submit">Create Report</button>
 						</div>
 					</div>
 				</form>

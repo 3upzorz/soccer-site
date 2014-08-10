@@ -142,4 +142,38 @@ $(function(){
 	/**
 	 * END SEARCH REPORT PAGE
 	 */
+
+	/** 
+	 * ADD USER PAGE
+	 */
+
+	//
+	$(':checkbox').change(function(e){
+		var thisClass = $(this).attr('class');
+
+		//this attribute is being toggled
+		if ($(this).attr('checked')) {
+			$(this).removeAttr('checked');
+        	$('#divisions').removeAttr('disabled');
+        }else{
+        	$(':checkbox.' + thisClass + ":not(#" + this.id + ")").removeAttr('checked');
+	    	$(this).attr('checked', 'checked');
+	        $('#divisions').attr('disabled', 'true');	
+        }
+
+	});
+
+	// $(':checkbox').bind('change', function() {
+ //        var thisClass = $(this).attr('class');
+ //        if ($(this).attr('checked')) {
+ //            $(':checkbox.' + thisClass + ":not(#" + this.id + ")").removeAttr('checked');
+ //        }
+ //        else {
+ //            $(this).attr('checked', 'checked');
+ //        }
+ //    });
+
+	/** 
+	 * END ADD USER PAGE
+	 */
 });
