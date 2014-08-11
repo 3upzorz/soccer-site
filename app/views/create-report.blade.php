@@ -129,11 +129,11 @@
 						</div>
 					</div>
 					<div class="row">
-						<div id="incident-container" class="col-md-12" data-incident-count="1">
+						<div id="incident-container" class="col-md-12" data-incident-count="0">
 							<div class="row incident-row">
 								<div class="col-sm-3 col-xs-4 form-group no-padding-right">
 									<label for="incident-list-1">Select</label>
-									<select class="form-control incident-list" id="incident-list-1" name="incidents[1][name]">
+									<select class="form-control incident-list" id="incident-list-1" name="incidents[0][name]">
 										<option val="def" selected disabled>Select an incident</option>
 										<option value="1">Red Card</option>
 										<option value="2">Yellow Card</option>
@@ -141,7 +141,7 @@
 								</div>
 								<div class="col-sm-9 col-xs-8 form-group">
 									<label>Description</label>
-									<input class="form-control" id="incident-description-1" name="incidents[1][description]" placeholder="your incident here..."></input>
+									<input class="form-control" id="incident-description-1" name="incidents[0][description]" placeholder="your incident here..."></input>
 								</div>
 							</div>
 						</div>

@@ -47,7 +47,7 @@
 						</div>
 						<div class="col-xs-6">
 							<div class="form-group">
-								<label for="phone2">Phone number 2</label>
+								<label for="phone2">Phone number 2 (optional)</label>
 								<input id="phone2" class="form-control" name="phone2" type="text">
 							</div>
 						</div>
@@ -92,6 +92,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<h2>Divisions</h2>
+								<p>Please check all the divisions that this user is able to referee. If the user is not a referee or is not qualified to referee any divisions you do not have to check any.</p>
 								<table class="table">
 									<thead>
 										<tr>

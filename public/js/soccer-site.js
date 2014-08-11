@@ -1,8 +1,8 @@
 //on document ready
 $(function(){
-	/**
-	 * REPORT CREATE PAGE
-	 */
+/**
+ * REPORT CREATE PAGE
+ */
 
 	//Add a new incident input to page
 	$("#add-incident-btn").click(function(e){
@@ -13,7 +13,7 @@ $(function(){
 		var row =   '<div id="incident-row-'+n+'" class="row incident-row" style="opacity:0;position:relative;margin-left:300px;">' + 
 						'<div class="col-sm-3 col-xs-4 form-group no-padding-right">' + 
 							'<label for="incident-list-' + n +  '">Select</label>'+
-							'<select class="form-control incident-list" id="incident-list-'+n+'" name="incidentList['+n+'][incidentName]"'+n+'">'+
+							'<select class="form-control incident-list" id="incident-list-'+n+'" name="incidents['+n+'][name]"'+n+'">'+
 								'<option val="def" selected disabled>Select an incident</option>'+
 								'<option value="1">Red Card</option>'+
 								'<option value="2">Yellow Card</option>'+
@@ -21,7 +21,7 @@ $(function(){
 						'</div>'+
 						'<div class="col-sm-9 col-xs-8 form-group">'+
 							'<label>Description</label>'+
-							'<input class="form-control" id="incident-description'+n+'" name="incidentList['+n+'][incidentDescription]'+n+'" placeholder="your incident here..."></input>'+
+							'<input class="form-control" id="incident-description'+n+'" name="incidents['+n+'][description]'+n+'" placeholder="your incident here..."></input>'+
 						'</div>'+
 					'</div>';
 		$('#incident-container').append(row);
@@ -76,7 +76,7 @@ $(function(){
 	},"Please select an option");
 
 	//Initalize form validation
-	//TODO commented for testing
+	//TODO uncomment after testing is done
 	// $('#create-report-form').validate({
 	// 	rules:{
 	// 		gameNumber:"required",
@@ -116,13 +116,13 @@ $(function(){
 		} 
 	});
 
-	/**
-	 * END REPORT CREATE PAGE
-	 */
+/**
+ * END REPORT CREATE PAGE
+ */
 
-	/**
-	 * SEARCH REPORT PAGE
-	 */
+/**
+ * SEARCH REPORT PAGE
+ */
 
 	//Initalize datepicker
 	$('#search-game-date').datepicker({
@@ -139,29 +139,14 @@ $(function(){
 	// $('#search-game-time').timepicker({
 	// 	minuteStep:5
 	// });
-	/**
-	 * END SEARCH REPORT PAGE
-	 */
 
-	/** 
-	 * ADD USER PAGE
-	 */
+/**
+ * END SEARCH REPORT PAGE
+ */
 
-	//
-	// $(':checkbox').change(function(e){
-	// 	var thisClass = $(this).attr('class');
-
-	// 	//this attribute is being toggled
-	// 	if ($(this).attr('checked')) {
-	// 		$(this).removeAttr('checked');
- //        	$('#divisions').removeAttr('disabled');
- //        }else{
- //        	$(':checkbox.' + thisClass + ":not(#" + this.id + ")").removeAttr('checked');
-	//     	$(this).attr('checked', 'checked');
-	//         $('#divisions').attr('disabled', 'true');	
- //        }
-
-	// });
+/** 
+ * ADD USER PAGE
+ */
 
 	$('#check-all-divisions').change(function(e){
 
@@ -176,7 +161,36 @@ $(function(){
 		}
 	});
 
-	/** 
-	 * END ADD USER PAGE
-	 */
+	//add validator methods
+	$.validator.addMethod("canadianPhone", function(value, element){
+		//allows for a 10 digit number with an optional country code 1
+		return this.optional(element) || /^1?[0-9]{10}$/.test(value);
+	},"Please enter a valid Canadian phone number");
+
+	//validate form
+	$('#add-user-form').validate({
+		rules:{
+			firstName:"required",
+			lastName:"required",
+			email:{
+				required:true,
+				email:true
+			},
+			phone1:{
+				required:true,
+				canadianPhone:true
+			},
+			addressLine1:"required",
+			city:"required",
+			postalCode:"required",
+			userType:{
+				required:true,
+				notDefault:true
+			}
+		}
+	});
+
+/** 
+ * END ADD USER PAGE
+ */
 });
