@@ -148,30 +148,33 @@ $(function(){
 	 */
 
 	//
-	$(':checkbox').change(function(e){
-		var thisClass = $(this).attr('class');
+	// $(':checkbox').change(function(e){
+	// 	var thisClass = $(this).attr('class');
 
-		//this attribute is being toggled
-		if ($(this).attr('checked')) {
-			$(this).removeAttr('checked');
-        	$('#divisions').removeAttr('disabled');
-        }else{
-        	$(':checkbox.' + thisClass + ":not(#" + this.id + ")").removeAttr('checked');
-	    	$(this).attr('checked', 'checked');
-	        $('#divisions').attr('disabled', 'true');	
-        }
+	// 	//this attribute is being toggled
+	// 	if ($(this).attr('checked')) {
+	// 		$(this).removeAttr('checked');
+ //        	$('#divisions').removeAttr('disabled');
+ //        }else{
+ //        	$(':checkbox.' + thisClass + ":not(#" + this.id + ")").removeAttr('checked');
+	//     	$(this).attr('checked', 'checked');
+	//         $('#divisions').attr('disabled', 'true');	
+ //        }
 
+	// });
+
+	$('#check-all-divisions').change(function(e){
+
+		if($(this).prop('checked')){
+			//check all boxes			
+			$(this).prop('checked', true);
+			$('.division-check').prop('checked', true);
+		}else{
+			//remove all checked boxes
+			$(this).prop('checked', false);
+			$('.division-check').prop('checked', false);
+		}
 	});
-
-	// $(':checkbox').bind('change', function() {
- //        var thisClass = $(this).attr('class');
- //        if ($(this).attr('checked')) {
- //            $(':checkbox.' + thisClass + ":not(#" + this.id + ")").removeAttr('checked');
- //        }
- //        else {
- //            $(this).attr('checked', 'checked');
- //        }
- //    });
 
 	/** 
 	 * END ADD USER PAGE
