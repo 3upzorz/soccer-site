@@ -120,6 +120,8 @@ class ReportController extends BaseController {
 		$division = Input::get("division");
 		$refType = Input::get("refType");
 
+		//die(var_dump(Input::all()));
+
 		$incidents = Input::get("incidents");
 
 		//create report
@@ -134,14 +136,14 @@ class ReportController extends BaseController {
 		$report->away_score = $awayScore;
 		$report->comments = $comments;
 		$report->ref_type = $refType;
-		$division = Input::get("division");
+		$report->division = $division;
 
 		$report->save();
 		//die(var_dump($incidents));
 		//loop through incidents and assiign to current report
-		// foreach($incidents as $incident){
-		// 	$report->attach($incident['name'],array("description" => $incident['description']));
-		// }
+		 foreach($incidents as $incident){
+		 	$report->Incident()->sync(array($report->id => array("description" => $incident['description'],"incident_id" => $incident['name'])));
+		 }
 
 		//return true;
 

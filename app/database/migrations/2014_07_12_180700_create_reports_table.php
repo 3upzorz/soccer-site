@@ -25,6 +25,7 @@ class CreateReportsTable extends Migration {
 			$table->integer("away_score");
 			$table->string("comments");
 			$table->integer("ref_type");
+			$table->integer("division");
 			$table->softDeletes();
 			$table->timestamps();
 		});
