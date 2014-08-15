@@ -34,6 +34,8 @@ Route::get('report/create', array('as' => 'create_report_view', 'uses' => 'HomeC
 Route::get('report/search', array('as' => 'search_report_view', 'uses' => 'HomeController@searchView'));
 
 Route::get('user/add', array('as' => 'add_user_view', 'uses' => 'UserController@addUserView'));
+
+
 Route::post('user/add', array('as' => 'add_user', 'uses' => 'UserController@addUser'));
 
 Route::get('report', array('as' => 'search_report_view', 'uses' => 'HomeController@reportView'));

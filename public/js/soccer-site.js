@@ -168,27 +168,28 @@ $(function(){
 	},"Please enter a valid Canadian phone number");
 
 	//validate form
-	$('#add-user-form').validate({
-		rules:{
-			firstName:"required",
-			lastName:"required",
-			email:{
-				required:true,
-				email:true
-			},
-			phone1:{
-				required:true,
-				canadianPhone:true
-			},
-			addressLine1:"required",
-			city:"required",
-			postalCode:"required",
-			userType:{
-				required:true,
-				notDefault:true
-			}
-		}
-	});
+	//TODO uncomment when testing finished
+	// $('#add-user-form').validate({
+	// 	rules:{
+	// 		firstName:"required",
+	// 		lastName:"required",
+	// 		email:{
+	// 			required:true,
+	// 			email:true
+	// 		},
+	// 		phone1:{
+	// 			required:true,
+	// 			canadianPhone:true
+	// 		},
+	// 		addressLine1:"required",
+	// 		city:"required",
+	// 		postalCode:"required",
+	// 		userType:{
+	// 			required:true,
+	// 			notDefault:true
+	// 		}
+	// 	}
+	// });
 
 /** 
  * END ADD USER PAGE
