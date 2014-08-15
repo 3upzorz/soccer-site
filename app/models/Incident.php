@@ -26,9 +26,9 @@ class Incident extends Eloquent {
 	/**
 	 * Define relationship to Reports
 	 */
-	public function report(){
-		return $this->belongsTo('Report');
-	}
+	// public function report(){
+	// 	return $this->belongsTo('Report');
+	// }
 
 	/**
 	 * Define relationship to IncidentType

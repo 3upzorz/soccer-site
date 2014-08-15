@@ -133,7 +133,7 @@
 							<div class="row incident-row">
 								<div class="col-sm-3 col-xs-4 form-group no-padding-right">
 									<label for="incident-list-1">Select</label>
-									<select class="form-control incident-list" id="incident-list-1" name="incidents[0][id]">
+									<select class="form-control incident-list" id="incident-type-list-1" name="incidents[0][typeId]">
 										<option value="def" selected disabled>Select an incident</option>
 										<option value="1">Red Card</option>
 										<option value="2">Yellow Card</option>

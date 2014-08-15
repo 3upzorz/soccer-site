@@ -21,6 +21,11 @@ class AddForeignKeys extends Migration {
 		Schema::table('users', function($table){
 			$table->foreign('user_type_id')->references('id')->on('user_types');
 		});
+
+		//TODO uncomment after login
+		// Schema::table('reports',function($table){
+		// 	$table->foreign('user_id')->references('id')->on('users');
+		// });
 	}
 
 	/**

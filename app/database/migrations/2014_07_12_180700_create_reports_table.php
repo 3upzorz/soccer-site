@@ -14,7 +14,7 @@ class CreateReportsTable extends Migration {
 	{
 		Schema::create('reports', function($table){	
 			$table->increments("id");
-			$table->integer("user_id");
+			$table->integer("user_id")->unsigned()->nullable();
 			$table->integer("game_number");
 			$table->timestamp("game_date");
 			$table->string("field");

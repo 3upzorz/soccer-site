@@ -11,6 +11,12 @@ class IncidentTypesTableSeeder extends Seeder {
         $incidentType->name = 'Red Card';
 
         $incidentType->save();
+
+        $incidentType = new IncidentType;
+
+        $incidentType->name = 'Yellow Card';
+
+        $incidentType->save();
     }
 
 }

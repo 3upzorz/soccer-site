@@ -14,9 +14,9 @@ class CreateIncidentsTable extends Migration {
 	{
 		Schema::create('incidents', function($table){
 			$table->increments("id");
-			$table->integer('incident_type_id')->unsigned();
+			$table->integer('incident_type_id')->unsigned()->nullable();
 			$table->text("description");
-			$table->integer('report_id')->unsigned();
+			$table->integer('report_id')->unsigned()->nullable();
 			$table->softDeletes();
 			$table->timestamps();
 		});

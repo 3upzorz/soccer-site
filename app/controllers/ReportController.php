@@ -120,9 +120,12 @@ class ReportController extends BaseController {
 		$division = Input::get("division");
 		$refType = Input::get("refType");
 
-		//die(var_dump(Input::all()));
-
 		$incidents = Input::get("incidents");
+
+		// echo '<pre>';
+		// var_dump($incidents);
+		// echo '</pre>';
+		// die();
 
 		//create report
 
@@ -139,13 +142,20 @@ class ReportController extends BaseController {
 		$report->division = $division;
 
 		$report->save();
-		//die(var_dump($incidents));
+		
 		//loop through incidents and assiign to current report
-		 // foreach($incidents as $incident){
-		 // 	$report->Incident()->sync(array($report->id => array("description" => $incident['description'],"incident_id" => $incident['id'])));
-		 // }
+		$incidentsArray = array();
+		foreach($incidents as $incident){
+			$incidentsArray[] = 
+				new Incident(
+					array(
+						'incident_type_id' => (int)$incident['typeId'],
+						'description' => $incident['description']
+					)
+				);
+		}
 
-		//return true;
+		$report->incidents()->saveMany($incidentsArray);
 
 		echo json_encode(array("success" => true));
 		return 0;
@@ -231,6 +241,8 @@ class ReportController extends BaseController {
 		$report->ref_type = $refType;
 		$report->division = $division;
 
+		$report->save();
+
 		$incidents = array(
 			new Incident(
 				array(
@@ -241,13 +253,13 @@ class ReportController extends BaseController {
 			new Incident(
 				array(
 					'incident_type_id' => 1,
-					'description' => 'I though someone died but actually they just fell asleep'
+					'description' => 'I thought someone died but actually they just fell asleep'
 				)
 			)
 		);
 
 		$report->incidents()->saveMany($incidents);
-		$report->save();
+		
 	}
 
 }
