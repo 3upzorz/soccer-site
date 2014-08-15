@@ -1,1 +1,0 @@
-/Applications/MAMP/bin/php/php5.5.3/bin/php
