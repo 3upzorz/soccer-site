@@ -232,9 +232,21 @@ class ReportController extends BaseController {
 		$report->division = $division;
 
 		$incidents = array(
-			new Incident(array()),
+			new Incident(
+				array(
+					'incident_type_id' => 1,
+					'description' => 'some nerd elbowed this other nerd, it was pretty funny actually'
+				)
+			),
+			new Incident(
+				array(
+					'incident_type_id' => 1,
+					'description' => 'I though someone died but actually they just fell asleep'
+				)
+			)
 		);
 
+		$report->incidents()->saveMany($incidents);
 		$report->save();
 	}
 
