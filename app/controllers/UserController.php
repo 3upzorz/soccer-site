@@ -15,7 +15,10 @@ class UserController extends BaseController {
 	 */
 	public function addUser(){
 
-		$input = Input::all();
+		$email = Input::get("email");
+		$email = Input::get("email");
+
+
 
 		echo '<pre>';
 		var_dump($input);

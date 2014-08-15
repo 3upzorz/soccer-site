@@ -142,7 +142,7 @@ class ReportController extends BaseController {
 		//die(var_dump($incidents));
 		//loop through incidents and assiign to current report
 		 foreach($incidents as $incident){
-		 	$report->Incident()->sync(array($report->id => array("description" => $incident['description'],"incident_id" => $incident['name'])));
+		 	$report->Incident()->sync(array($report->id => array("description" => $incident['description'],"incident_id" => $incident['id'])));
 		 }
 
 		//return true;
@@ -157,6 +157,48 @@ class ReportController extends BaseController {
 		$data['incidents'] = $data['report']->Incidents();
 
 		return View::make("show_report",$data);
+	}
+
+	public function search(){
+
+		$id = Input::get("gameNumber");
+		$date = Input::get("gameDate");
+		$teamName = Input::get("teamName");
+		$refName = Input::get("refName");
+
+		$fields = array();
+
+		if($id){
+			$report = Report::find($id);
+			echo json_encode($report);
+			return 1;
+		}
+
+
+		// $sql = "SELECT * FROM reports r";
+		// if($refName){
+		// 	$sql = $sql . " INNER JOIN users u ON u.id = r.user_id
+		// 	AND u.full_name LIKE %" . $refName . " ";
+		// }
+
+		// $sql = $sql . " WHERE ";
+
+		// if($teamName){
+		// 	$sql = $sql . " home_name LIKE %" . $teamName . " OR away_name LIKE %" . $teamName . " ";
+
+		// 	if($date){
+		// 		$sql = $sql . " AND "
+		// 	}
+		// }
+
+		
+
+		// if($date){
+		// 	$fields[] = "game_date" => DateTime::createFromFormat('d/m/Y h:i A', $gameDate . " " . $gameTime)->format('Y-m-d H:i:s');;
+		// }
+
+		echo json_encode($report);
+
 	}
 
 	// public function test(){
