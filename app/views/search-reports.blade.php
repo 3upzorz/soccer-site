@@ -32,13 +32,13 @@
 								<div class="col-xs-6 col-sm-3">
 									<div class="form-group">
 										<label for="search-team">Team</label>
-										<input id="search-team" class="form-control" type="text" placeholder="Team Name">
+										<input id="search-team" class="form-control" type="text" placeholder="Team Name" name="teamName">
 									</div>
 								</div>
 								<div class="col-xs-6 col-sm-3">
 									<div class="form-group">
 										<label for="search-ref">Referee</label>
-										<input id="search-ref" class="form-control" type="text" placeholder="Referee Name">
+										<input id="search-ref" class="form-control" type="text" placeholder="Referee Name" name="refName">
 									</div>
 								</div>
 							</div>
