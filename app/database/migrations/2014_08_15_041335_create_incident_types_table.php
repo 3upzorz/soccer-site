@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateReportIncidentsTable extends Migration {
+class CreateIncidentTypesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,13 +12,10 @@ class CreateReportIncidentsTable extends Migration {
 	 */
 	public function up()
 	{
-			Schema::create('report_incidents', function($table)
-		{
-
-			$table->increments("id");
-			$table->integer("report_id");
-			$table->integer("incident_id");
-			$table->text("description");
+		//
+		Schema::create('incident_types',function($table){
+			$table->increments('id');
+			$table->string('name');
 			$table->softDeletes();
 			$table->timestamps();
 		});

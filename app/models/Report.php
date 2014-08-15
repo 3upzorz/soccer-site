@@ -17,20 +17,32 @@ class Report extends Eloquent {
 	 *
 	 * @var array
 	 */
-	
-
-
-	public function RefereeRole(){
-		return $this->belongsTo("RefereeRole");
+		
+	/**
+	 * Define relationship to Incidents
+	 */
+	public function incidents(){
+		return $this->hasMany('Incident');
 	}
 
-	public function Incident(){
-		return $this->belongsToMany("Incident","report_incidents","incident_id","report_id");
+	/**
+	 * Define relationship to User
+	 */
+	public function user(){
+		return $this->belongsTo('User');
 	}
 
-	public function User(){
-		return $this->belongsTo("User");
-	}
+	// public function RefereeRole(){
+	// 	return $this->belongsTo("RefereeRole");
+	// }
+
+	// public function Incident(){
+	// 	return $this->belongsToMany("Incident","report_incidents","incident_id","report_id");
+	// }
+
+	// public function User(){
+	// 	return $this->belongsTo("User");
+	// }
 	
 
 }

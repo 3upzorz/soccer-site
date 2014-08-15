@@ -12,9 +12,7 @@ class CreateUserTypesTable extends Migration {
 	 */
 	public function up()
 	{
-			Schema::create('user_types', function($table)
-		{
-
+		Schema::create('user_types', function($table){
 			$table->increments("id");
 			$table->string("name");
 			$table->softDeletes();

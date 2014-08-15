@@ -12,17 +12,15 @@ class CreateUsersTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('users', function($table)
-		{
-
+		Schema::create('users', function($table){
 			$table->increments("id");
 			$table->string("email");
 			$table->string("password");
 			$table->string("full_name");
-			$table->integer("user_type_id");
+			$table->integer('user_type_id')->unsigned();
 			$table->softDeletes();
 			$table->timestamps();
-			$table->string("remember_token");
+			$table->string("remember_token");	
 		});
 	}
 

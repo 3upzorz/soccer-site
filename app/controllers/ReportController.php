@@ -141,9 +141,9 @@ class ReportController extends BaseController {
 		$report->save();
 		//die(var_dump($incidents));
 		//loop through incidents and assiign to current report
-		 foreach($incidents as $incident){
-		 	$report->Incident()->sync(array($report->id => array("description" => $incident['description'],"incident_id" => $incident['id'])));
-		 }
+		 // foreach($incidents as $incident){
+		 // 	$report->Incident()->sync(array($report->id => array("description" => $incident['description'],"incident_id" => $incident['id'])));
+		 // }
 
 		//return true;
 
@@ -197,13 +197,45 @@ class ReportController extends BaseController {
 		// 	$fields[] = "game_date" => DateTime::createFromFormat('d/m/Y h:i A', $gameDate . " " . $gameTime)->format('Y-m-d H:i:s');;
 		// }
 
-		echo json_encode($report);
+		// echo json_encode($report);
 
 	}
 
-	// public function test(){
 
-	// 	echo Hash::make("test");
-	// }
+	public function test(){
+
+		$report = new Report();
+
+		$gameNumber = "12345";
+		$gameDate = "03/08/2014";
+		$gameTime = "4:35 PM";
+		$field = "Riverside";
+		$homeName = "Grizzlies";
+		$homeScore = 5;
+		$awayName = "Arctic Squirrels";
+		$awayScore = 6;
+		$comments = "aefasefase";
+		$division = 1;
+		$refType = 1;
+
+		//create report
+		$report->user_id = 1;//Auth::id();
+		$report->game_number = $gameNumber;
+		$report->game_date = DateTime::createFromFormat('d/m/Y h:i A', $gameDate . " " . $gameTime)->format('Y-m-d H:i:s');
+		$report->field = $field;
+		$report->home_name = $homeName;
+		$report->home_score = $homeScore;
+		$report->away_name = $awayName;
+		$report->away_score = $awayScore;
+		$report->comments = $comments;
+		$report->ref_type = $refType;
+		$report->division = $division;
+
+		$incidents = array(
+			new Incident(array()),
+		);
+
+		$report->save();
+	}
 
 }

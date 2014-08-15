@@ -12,8 +12,7 @@ class CreateReportsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('reports', function($table)
-		{	
+		Schema::create('reports', function($table){	
 			$table->increments("id");
 			$table->integer("user_id");
 			$table->integer("game_number");

@@ -1,9 +1,6 @@
 <?php
 
-
 class UserType extends Eloquent {
-
-	
 
 	/**
 	 * The database table used by the model.
@@ -17,11 +14,9 @@ class UserType extends Eloquent {
 	 *
 	 * @var array
 	 */
-	
 
-	public function User(){
+	
+	public function user(){
 		return $this->hasMany("User","user_type_id");
 	}
-	
-
 }

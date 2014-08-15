@@ -12,11 +12,11 @@ class CreateIncidentsTable extends Migration {
 	 */
 	public function up()
 	{
-			Schema::create('incidents', function($table)
-		{
-
+		Schema::create('incidents', function($table){
 			$table->increments("id");
-			$table->string("name");
+			$table->integer('incident_type_id')->unsigned();
+			$table->text("description");
+			$table->integer('report_id')->unsigned();
 			$table->softDeletes();
 			$table->timestamps();
 		});
