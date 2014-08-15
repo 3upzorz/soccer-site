@@ -57,9 +57,9 @@
 							<div class="form-group">
 								<label for="division">Division</label>
 								<select class="form-control" id="division" name="division">
-									<option val="def" selected disabled>Select a Division</option>
-									<option val="1">U-15 Girls</option>
-									<option val="2">U-18 Boys</option>
+									<option value="def" selected disabled>Select a Division</option>
+									<option value="1">U-15 Girls</option>
+									<option value="2">U-18 Boys</option>
 								</select>
 							</div>
 						</div>
@@ -134,7 +134,7 @@
 								<div class="col-sm-3 col-xs-4 form-group no-padding-right">
 									<label for="incident-list-1">Select</label>
 									<select class="form-control incident-list" id="incident-list-1" name="incidents[0][id]">
-										<option val="def" selected disabled>Select an incident</option>
+										<option value="def" selected disabled>Select an incident</option>
 										<option value="1">Red Card</option>
 										<option value="2">Yellow Card</option>
 									</select>
