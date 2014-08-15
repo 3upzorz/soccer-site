@@ -13,7 +13,7 @@ $(function(){
 		var row =   '<div id="incident-row-'+n+'" class="row incident-row" style="opacity:0;position:relative;margin-left:300px;">' + 
 						'<div class="col-sm-3 col-xs-4 form-group no-padding-right">' + 
 							'<label for="incident-list-' + n +  '">Select</label>'+
-							'<select class="form-control incident-list" id="incident-list-'+n+'" name="incidents['+n+'][name]"'+n+'">'+
+							'<select class="form-control incident-list" id="incident-list-'+n+'" name="incidents['+n+'][id]"'+n+'">'+
 								'<option val="def" selected disabled>Select an incident</option>'+
 								'<option value="1">Red Card</option>'+
 								'<option value="2">Yellow Card</option>'+
