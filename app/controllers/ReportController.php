@@ -161,15 +161,15 @@ class ReportController extends BaseController {
 
 	public function search(){
 
-		$id = Input::get("gameNumber");
+		$gameNumber = Input::get("gameNumber");
 		$date = Input::get("gameDate");
 		$teamName = Input::get("teamName");
 		$refName = Input::get("refName");
 
 		$fields = array();
 
-		if($id){
-			$report = Report::find($id);
+		if($gameNumber){
+			$report = Report::find($gameNumber);
 			echo json_encode($report);
 			return 1;
 		}

@@ -98,7 +98,7 @@
 										<tr>
 											<th colspan="3">
 												<label for="check-all-divisions">
-													<input id="check-all-divisions" class="division-check" name="checkAllDivisions" type="checkbox"> Check All
+													<input id="check-all-divisions" name="checkAllDivisions" type="checkbox"> Check All
 												</label>
 											</th>
 										</tr>

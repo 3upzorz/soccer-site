@@ -140,6 +140,16 @@ $(function(){
 	// 	minuteStep:5
 	// });
 
+	//Initalize form validation
+	//TODO uncomment after testing is done
+	// $('#search-report-form').validate({
+	// 	rules:{
+	// 		gameDate:{
+	// 			dateString:true
+	// 		}
+	// 	}
+	// });
+
 /**
  * END SEARCH REPORT PAGE
  */
@@ -148,6 +158,7 @@ $(function(){
  * ADD USER PAGE
  */
 
+ 	//check/uncheck boxes if the check all box is checked
 	$('#check-all-divisions').change(function(e){
 
 		if($(this).prop('checked')){
@@ -159,6 +170,12 @@ $(function(){
 			$(this).prop('checked', false);
 			$('.division-check').prop('checked', false);
 		}
+	});
+
+	//uncheck the check all box if it is checked and a division is unchecked
+	$('.division-check').change(function(e){
+		
+		$('#check-all-divisions').prop('checked',false);
 	});
 
 	//add validator methods

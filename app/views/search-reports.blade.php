@@ -14,7 +14,7 @@
 					<div class="col-md-12">
 						{{Form::open(array(
 							'url' => 'report/search',
-							'id' => 'search-form'
+							'id' => 'search-report-form'
 						))}}
 							<div class="row">
 								<div class="col-xs-6 col-sm-3">
@@ -44,7 +44,7 @@
 							</div>
 							<div class="row">
 								<div class="col-md-12">
-									<button id="search-submit-btn" form="search-form" class="btn btn-default" type="submit">Search</button>
+									<button id="search-submit-btn" form="search-report-form" class="btn btn-default" type="submit">Search</button>
 								</div>
 							</div>
 						{{Form::close()}}
