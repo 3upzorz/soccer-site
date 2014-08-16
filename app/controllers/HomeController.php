@@ -20,13 +20,6 @@ class HomeController extends BaseController {
 		return View::make('hello');
 	}
 
-
-	public function loginView(){
-
-		return View::make("login", array('title' => 'PCSA - Login'));
-
-	}
-
 	public function searchView(){
 
 		return View::make('search-reports', array('title' => 'PCSA - Report Search'));
@@ -35,22 +28,6 @@ class HomeController extends BaseController {
 	public function reportView(){
 
 		return View::make('report', array('title' => 'PCSA - Game Report'));
-	}
-
-	public function login(){
-
-		$email = Input::get("email");
-		$password = Input::get("password");
-
-		if (Auth::attempt(array('email' => $email, 'password' => $password)))
-		{
-		    //return Redirect::intended('dashboard');
-		    return true;
-		}
-		else{
-			return false;
-		}
-
 	}
 
 	public function registerView(){

@@ -54,6 +54,14 @@ Route::filter('auth.basic', function()
 	return Auth::basic();
 });
 
+Route::filter('isAdmin', function(){
+	if(Auth::check()){
+
+	}else{
+		return Redirect::route('login')->with('flashNotice', 'You must be logged in as an admin to view this page');;
+	}
+});
+
 /*
 |--------------------------------------------------------------------------
 | Guest Filter

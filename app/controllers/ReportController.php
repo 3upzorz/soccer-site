@@ -96,15 +96,6 @@ class ReportController extends BaseController {
 	}
 
 	public function createReport(){
-		//TODO REMOVE
-		// $input = Input::all();
-		// echo '<pre>';
-		// var_dump($input);
-		// echo '</pre>';
-		// die();
-
-
-
 
 		$report = new Report();
 
@@ -121,11 +112,6 @@ class ReportController extends BaseController {
 		$refType = Input::get("refType");
 
 		$incidents = Input::get("incidents");
-
-		// echo '<pre>';
-		// var_dump($incidents);
-		// echo '</pre>';
-		// die();
 
 		//create report
 
@@ -214,52 +200,52 @@ class ReportController extends BaseController {
 
 	public function test(){
 
-		$report = new Report();
+		// $report = new Report();
 
-		$gameNumber = "12345";
-		$gameDate = "03/08/2014";
-		$gameTime = "4:35 PM";
-		$field = "Riverside";
-		$homeName = "Grizzlies";
-		$homeScore = 5;
-		$awayName = "Arctic Squirrels";
-		$awayScore = 6;
-		$comments = "aefasefase";
-		$division = 1;
-		$refType = 1;
+		// $gameNumber = "12345";
+		// $gameDate = "03/08/2014";
+		// $gameTime = "4:35 PM";
+		// $field = "Riverside";
+		// $homeName = "Grizzlies";
+		// $homeScore = 5;
+		// $awayName = "Arctic Squirrels";
+		// $awayScore = 6;
+		// $comments = "aefasefase";
+		// $division = 1;
+		// $refType = 1;
 
-		//create report
-		$report->user_id = 1;//Auth::id();
-		$report->game_number = $gameNumber;
-		$report->game_date = DateTime::createFromFormat('d/m/Y h:i A', $gameDate . " " . $gameTime)->format('Y-m-d H:i:s');
-		$report->field = $field;
-		$report->home_name = $homeName;
-		$report->home_score = $homeScore;
-		$report->away_name = $awayName;
-		$report->away_score = $awayScore;
-		$report->comments = $comments;
-		$report->ref_type = $refType;
-		$report->division = $division;
+		// //create report
+		// $report->user_id = 1;//Auth::id();
+		// $report->game_number = $gameNumber;
+		// $report->game_date = DateTime::createFromFormat('d/m/Y h:i A', $gameDate . " " . $gameTime)->format('Y-m-d H:i:s');
+		// $report->field = $field;
+		// $report->home_name = $homeName;
+		// $report->home_score = $homeScore;
+		// $report->away_name = $awayName;
+		// $report->away_score = $awayScore;
+		// $report->comments = $comments;
+		// $report->ref_type = $refType;
+		// $report->division = $division;
 
-		$report->save();
+		// $report->save();
 
-		$incidents = array(
-			new Incident(
-				array(
-					'incident_type_id' => 1,
-					'description' => 'some nerd elbowed this other nerd, it was pretty funny actually'
-				)
-			),
-			new Incident(
-				array(
-					'incident_type_id' => 1,
-					'description' => 'I thought someone died but actually they just fell asleep'
-				)
-			)
-		);
+		// $incidents = array(
+		// 	new Incident(
+		// 		array(
+		// 			'incident_type_id' => 1,
+		// 			'description' => 'some nerd elbowed this other nerd, it was pretty funny actually'
+		// 		)
+		// 	),
+		// 	new Incident(
+		// 		array(
+		// 			'incident_type_id' => 1,
+		// 			'description' => 'I thought someone died but actually they just fell asleep'
+		// 		)
+		// 	)
+		// );
 
-		$report->incidents()->saveMany($incidents);
-		
+		// $report->incidents()->saveMany($incidents);
+		Auth::logout();
 	}
 
 }

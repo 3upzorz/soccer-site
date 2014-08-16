@@ -11,9 +11,9 @@
 		<div class="row">
 			<div class="col-md-12">
 				{{Form::open(array(
-								'url' => 'report/create',
-								'id' => 'create-report-form'
-							))}}
+						'url' => 'report/create',
+						'id' => 'create-report-form'
+					))}}
 					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group">
