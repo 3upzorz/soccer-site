@@ -55,25 +55,48 @@ Route::filter('auth.basic', function()
 });
 
 /**
+ * Checks that the user has at least referee level permission
+ */
+Route::filter('isRef',function(){
+
+	if(Auth::check()){
+		if((int)Auth::user()->user_type_id <= 3){
+			//user has the correct permissions, do nothing
+		}else{
+
+			return View::make('error')->with(
+				array(
+					'title'          => 'Error - PCSA',
+					'plainContainer' => true,
+					'errorHeading'   => 'Invalid Credentials',
+					'errorBody'      => 'You must be logged in to view this page'
+				)
+			);
+		}
+	}else{
+		return Redirect::route('login')->with('flashNotice', 'You must be logged in to view this page');
+	}
+});
+
+/**
  * Checks that the user has at least admin level permission
  */
 Route::filter('isAdmin', function(){
 
 	if(Auth::check()){
 		if((int)Auth::user()->user_type_id <= 2){
-			Log::info('logged in');
 			//user has the correct permissions, do nothing
 		}else{
-			Log::info('logged in as ref');
 			return View::make('error')->with(
 				array(
-					'errorHeading' => 'Invalid Credentials',
-					'errorBody'    => 'You must be logged in as an admin to view this page',
+					'title'          => 'Error - PCSA',
+					'plainContainer' => true,
+					'errorHeading'   => 'Invalid Credentials',
+					'errorBody'      => 'You must be logged in as an admin to view this page'
 				)
 			);
 		}
 	}else{
-		Log::info('not logged in at all');
 		return Redirect::route('login')->with('flashNotice', 'You must be logged in as an admin to view this page');
 	}
 });

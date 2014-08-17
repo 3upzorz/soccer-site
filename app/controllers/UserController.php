@@ -7,7 +7,7 @@ class UserController extends BaseController {
 	 */
 	public function addUserView(){
 
-		return View::make('add-user', array('title' => 'PCSA - Add User'));
+		return View::make('add-user', array('title' => 'PCSA - Add User', ));
 	}
 
 	/**
@@ -19,14 +19,17 @@ class UserController extends BaseController {
 	}
 
 	/**
-	 * logs in the user
+	 * login the user
+	 * TODO validate email & password
 	 */
 	public function login(){
 
-		$email = Input::get("email");
-		$password = Input::get("password");
+		$credentials = array(
+			'email'    => Input::get("email"),
+			'password' => Input::get("password")
+		);
 
-		if (Auth::attempt(array('email' => $email, 'password' => $password)))
+		if (Auth::attempt($credentials))
 		{
 			return Redirect::route('index');
 		}

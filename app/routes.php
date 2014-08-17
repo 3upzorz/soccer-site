@@ -11,6 +11,22 @@
 |
 */
 
+Route::group(array('before' => 'isRef'),function(){
+
+	Route::get('report/create', array('as' => 'create_report_view', 'uses' => 'ReportController@createReportView'));
+	Route::post('report/create', array('as' => 'create_report', 'uses' => 'ReportController@createReport'));
+
+	Route::get('/', array('as' => 'index', function(){	
+		
+		//if user is ref
+		if(Auth::user()->user_type_id == 3){
+			return Redirect::route('create_report_view');	
+		}
+		//
+		return Redirect::route('add_user_view');
+	}));
+});
+
 Route::group(array('before' => 'isAdmin'),function(){
 
 	Route::get('report/search', array('as' => 'search_report_view', 'uses' => 'ReportController@searchView'));
@@ -21,26 +37,9 @@ Route::group(array('before' => 'isAdmin'),function(){
 	Route::post('user/add', array('as' => 'add_user', 'uses' => 'UserController@addUser'));
 });
 
-Route::get('/', array('as' => 'index', function()
-{	
-	//if user logged in
-	if(Auth::check()){
 
-		//if user is ref
-		if(Auth::user()->user_type_id == 3){
-			return Redirect::route('create_report_view');	
-		}
-
-		return Redirect::route('add_user_view');
-		
-	}else{
-		return View::make('login');
-	}
-}));
 
 Route::get('login', array('as' => 'login_view', 'uses' => 'UserController@loginView'));
 Route::post('login', array('as' => 'login', 'uses' => 'UserController@login'));
 
-Route::get('report/create', array('as' => 'create_report_view', 'uses' => 'ReportController@createReportView'));
-Route::post('report/create', array('as' => 'create_report', 'uses' => 'ReportController@createReport'));
 Route::get('test', array('uses' => 'ReportController@test'));
