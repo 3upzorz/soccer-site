@@ -6,7 +6,7 @@ label.error{
 	color:red;
 }
 
-#content{
+.page-effect{
 	border: 1px solid rgb(124, 124, 124);
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;

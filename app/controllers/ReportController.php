@@ -246,6 +246,7 @@ class ReportController extends BaseController {
 
 		// $report->incidents()->saveMany($incidents);
 		Auth::logout();
+		return View::make('error');
 	}
 
 }

@@ -11,6 +11,16 @@
 |
 */
 
+Route::group(array('before' => 'isAdmin'),function(){
+
+	Route::get('report/search', array('as' => 'search_report_view', 'uses' => 'ReportController@searchView'));
+
+	Route::get('report', array('as' => 'search_report_view', 'uses' => 'ReportController@reportView'));
+
+	Route::get('user/add', array('as' => 'add_user_view', 'uses' => 'UserController@addUserView'));
+	Route::post('user/add', array('as' => 'add_user', 'uses' => 'UserController@addUser'));
+});
+
 Route::get('/', array('as' => 'index', function()
 {	
 	//if user logged in
@@ -28,29 +38,9 @@ Route::get('/', array('as' => 'index', function()
 	}
 }));
 
-
-Route::post('register', array('as' => 'registeer', 'uses' => 'HomeController@register'));
-
+Route::get('login', array('as' => 'login_view', 'uses' => 'UserController@loginView'));
 Route::post('login', array('as' => 'login', 'uses' => 'UserController@login'));
 
+Route::get('report/create', array('as' => 'create_report_view', 'uses' => 'ReportController@createReportView'));
 Route::post('report/create', array('as' => 'create_report', 'uses' => 'ReportController@createReport'));
-
-Route::get('showReport/{id}', array('as' => 'show_report', 'uses' => 'HomeController@showReport/{id}'));
-
-Route::get('login', array('as' => 'login_view', 'uses' => 'UserController@addUserView'));
-
-Route::get('register', array('as' => 'register_view', 'uses' => 'HomeController@registerView'));
-
-Route::get('report/create', array('as' => 'create_report_view', 'uses' => 'HomeController@createReportView'));
-
-Route::get('report/search', array('as' => 'search_report_view', 'uses' => 'HomeController@searchView'));
-
-Route::get('user/add', array('as' => 'add_user_view', 'uses' => 'UserController@addUserView'));
-
-
-Route::post('user/add', array('as' => 'add_user', 'uses' => 'UserController@addUser'));
-
-Route::get('report', array('as' => 'search_report_view', 'uses' => 'HomeController@reportView'));
-
 Route::get('test', array('uses' => 'ReportController@test'));
-

@@ -37,7 +37,11 @@
 		</div>
 	</nav>
 
+	@if(isset($plainContainer))
+	<div id="content" class="container page-effect">
+	@else
 	<div id="content" class="container">
+	@endif
 	@section('container')
 
 	@show
