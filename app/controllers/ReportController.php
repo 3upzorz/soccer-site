@@ -162,13 +162,36 @@ class ReportController extends BaseController {
 		$teamName = Input::get("teamName");
 		$refName = Input::get("refName");
 
+		$start_date = DateTime::createFromFormat('d/m/Y h:i A', $date)->format('Y-m-d H:i:s');
+		$end_date = DateTime::createFromFormat('d/m/Y h:i A', $date . " 11:59 PM")->format('Y-m-d H:i:s');
+
 		$fields = array();
 
 		if($gameNumber){
-			$report = Report::find($gameNumber);
+			$report = Report::where("game_number","=",$gameNumber);
 			echo json_encode($report);
 			return 1;
 		}
+
+
+		DB::table("reports");
+
+		if($teamName){
+			DB::where("away_name","=",$teamName);
+			DB::orWHere("home_name","=",$teamName);
+		}
+		if($date){
+			DB::where("game_date",">=",$start_date);
+			DB::where("game_date","<=",$end_date);
+		}
+		if($refName){
+			DB::join("users","users.id","=","reports.user_id");
+			DB::where("users.full_name","LIKE","%$refName%");	
+		}
+
+
+		$results = DB::get();
+
 
 
 		// $sql = "SELECT * FROM reports r";
