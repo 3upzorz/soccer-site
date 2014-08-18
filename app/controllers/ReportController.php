@@ -97,6 +97,23 @@ class ReportController extends BaseController {
 
 	public function createReport(){
 
+
+		$validator = Validator::make(Input::all(),
+			array("gameNumber" => "required|integer",
+				"gameDate" => "required|date",
+				"gameTime" => "required",
+				"field" => "required",
+				"homeName" => "required",
+				"homeScore" => "required|integer",
+				"awayScore" => "required|integer",
+				"awayName" => "required",
+				"division" => "requuired|integer",
+				"refType" => "required|integer"));
+
+		if($validator->fails()){
+			return View::make("create-report", array('title' => 'PCSA - Create Report',"errors" => $validator->messages()));
+		}
+
 		$report = new Report();
 
 		$gameNumber = Input::get("gameNumber");
@@ -192,31 +209,8 @@ class ReportController extends BaseController {
 
 		$results = DB::get();
 
+		die(var_dump($results));
 
-
-		// $sql = "SELECT * FROM reports r";
-		// if($refName){
-		// 	$sql = $sql . " INNER JOIN users u ON u.id = r.user_id
-		// 	AND u.full_name LIKE %" . $refName . " ";
-		// }
-
-		// $sql = $sql . " WHERE ";
-
-		// if($teamName){
-		// 	$sql = $sql . " home_name LIKE %" . $teamName . " OR away_name LIKE %" . $teamName . " ";
-
-		// 	if($date){
-		// 		$sql = $sql . " AND "
-		// 	}
-		// }
-
-		
-
-		// if($date){
-		// 	$fields[] = "game_date" => DateTime::createFromFormat('d/m/Y h:i A', $gameDate . " " . $gameTime)->format('Y-m-d H:i:s');;
-		// }
-
-		// echo json_encode($report);
 
 	}
 
