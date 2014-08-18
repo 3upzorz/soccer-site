@@ -192,6 +192,8 @@ class ReportController extends BaseController {
 
 		$results = DB::get();
 
+		die(var_dump($results));
+
 
 
 		// $sql = "SELECT * FROM reports r";
