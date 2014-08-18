@@ -178,7 +178,7 @@ class ReportController extends BaseController {
 
 		if($teamName){
 			DB::where("away_name","=",$teamName);
-			DB::orWHere("home_name","=",$teamName);
+			DB::orWhere("home_name","=",$teamName);
 		}
 		if($date){
 			DB::where("game_date",">=",$start_date);
@@ -271,6 +271,7 @@ class ReportController extends BaseController {
 
 		// $report->incidents()->saveMany($incidents);
 		Auth::logout();
+		return View::make('error');
 	}
 
 }
