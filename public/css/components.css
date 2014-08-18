@@ -11,6 +11,15 @@
 }
 
 /**
+ * Login page
+ */
+
+.flash-msg {
+	padding: 10px 0px;
+	margin-top: 10px;
+}
+
+/**
  * Create report page
  */
 #add-incident-btn{

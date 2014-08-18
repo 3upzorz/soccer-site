@@ -14,15 +14,18 @@
     <img src="img/logo.gif" alt="Po Co Soccer Association Logo" title="Po Co Soccer Association Logo"/> 
     <div class="row">
       <div class="col-md-12">
-        @if(isset($flashNotice))
-          {{$flashNotice}}
+        @if(isset($flashError))
+          <p class="bg-danger flash-msg">{{$flashError}}</p>
+        @endif
+        @if(isset($flashSuccess))
+          <p class="bg-success flash-msg">{{$flashSuccess}}</p>
         @endif
         {{Form::open(
-            array(
-              'url'=>'login',
-              'id'=>'login-form'
-            )
-          )}}
+          array(
+            'url'=>'login',
+            'id'=>'login-form'
+          )
+        )}}
 
         <div class="form-group">  
         <label for="email">Email address</label>

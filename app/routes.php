@@ -42,4 +42,6 @@ Route::group(array('before' => 'isAdmin'),function(){
 Route::get('login', array('as' => 'login_view', 'uses' => 'UserController@loginView'));
 Route::post('login', array('as' => 'login', 'uses' => 'UserController@login'));
 
+Route::get('logout', array('as' => 'logout', 'uses' => 'UserController@logout'));
+
 Route::get('test', array('uses' => 'ReportController@test'));

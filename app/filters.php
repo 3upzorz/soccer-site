@@ -74,7 +74,7 @@ Route::filter('isRef',function(){
 			);
 		}
 	}else{
-		return Redirect::route('login')->with('flashNotice', 'You must be logged in to view this page');
+		return Redirect::route('login')->with('flashError', 'You must be logged in to view this page');
 	}
 });
 
@@ -97,7 +97,7 @@ Route::filter('isAdmin', function(){
 			);
 		}
 	}else{
-		return Redirect::route('login')->with('flashNotice', 'You must be logged in as an admin to view this page');
+		return Redirect::route('login')->with('flashError', 'You must be logged in as an admin to view this page');
 	}
 });
 

@@ -12,7 +12,7 @@
 	@if(isset($title))
 		<title>{{$title}}</title>
 	@else
-		<title>Port Coquitlam Soccer Association</title>
+		<title>PCSA</title>
 	@endif
 </head>
 <body>
@@ -25,13 +25,16 @@
 			        <span class="icon-bar"></span>
 			        <span class="icon-bar"></span>
 			      </button>
-				<a href="#" class="navbar-brand">Brand</a>
+				<span class="navbar-brand">Brand</span>
 			</div>
 			<div id="game-report-navbar-collapse" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li class="class">{{HTML::link('/', 'Home')}}</li>
-					<li class="class">{{HTML::link('/report/create', 'Create')}}</li>
-					<li class="class">{{HTML::link('/report/search', 'Search')}}</li>
+					<li>{{HTML::link('/report/create', 'Create Report')}}</li>
+					@if(Auth::user()->user_type_id <= 2)
+						<li>{{HTML::link('/report/search', 'Search Reports')}}</li>
+						<li>{{HTML::link('/user/add', 'Add User')}}</li>
+					@endif
+					<li>{{HTML::link('/logout', 'Logout')}}</li>
 				</ul>
 			</div>
 		</div>

@@ -15,7 +15,22 @@ class UserController extends BaseController {
 	 */
 	public function loginView(){
 
-		return View::make("login", array('title' => 'PCSA - Login'));
+		$flashError = Session::get('flashError');
+		$flashSuccess = Session::get('flashSuccess');
+
+		$data = array(
+			'title' => 'PCSA - Login',
+		);
+
+		if(isset($flashError) && $flashError){
+			$data['flashError'] = $flashError;
+		}
+
+		if(isset($flashSuccess) && $flashSuccess){
+			$data['flashSuccess'] = $flashSuccess;
+		}
+
+		return View::make("login", $data);
 	}
 
 	/**
@@ -37,6 +52,15 @@ class UserController extends BaseController {
 			return View::make('login')->with('flashNotice', 'Email/Password incorrect');
 		}
 
+	}
+
+	/**
+	 * logout the user and redirect to the login page with success
+	 */
+	public function logout(){
+
+		Auth::logout();
+		return Redirect::route('login')->with('flashSuccess', 'Successfully logged out!');
 	}
 
 	/**
