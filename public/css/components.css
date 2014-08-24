@@ -61,8 +61,22 @@
 /**
  * User Management Panel
  */
+
+#check-all-permissions{
+	margin-bottom:20px;
+}
+
 .table-list{
 	padding-left:0px;
+}
+
+.permission-list{
+	padding-left:20px;
+}
+
+.permission-list > li{
+	display:inline-block;
+	margin-right:25px;
 }
 
 .icon-list{

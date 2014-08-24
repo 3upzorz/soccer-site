@@ -154,6 +154,35 @@ $(function(){
  * END SEARCH REPORT PAGE
  */
 
+
+/**
+ * USER MANAGEMENT PANEL
+ */
+
+	//check/uncheck boxes if the check all box is checked
+	$('#check-all-permissions').change(function(e){
+
+		if($(this).prop('checked')){
+			//check all boxes			
+			$(this).prop('checked', true);
+			$('.permission-check').prop('checked', true);
+		}else{
+			//remove all checked boxes
+			$(this).prop('checked', false);
+			$('.permission-check').prop('checked', false);
+		}
+	});
+
+	//uncheck the check all box if it is checked and a permission is unchecked
+	$('.permission-check').change(function(e){
+		
+		$('#check-all-permissions').prop('checked',false);
+	});
+
+/**
+ * END USER MANAGEMENT PANEL
+ */
+
 /** 
  * ADD USER PAGE
  */
