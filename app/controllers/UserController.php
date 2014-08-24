@@ -71,12 +71,9 @@ class UserController extends BaseController {
 		$email = Input::get("email");
 		$email = Input::get("email");
 
-
-
-		echo '<pre>';
-		var_dump($input);
-		echo '</pre>';
 	}
 
-	
+	/**
+	 * 
+	 */
 }

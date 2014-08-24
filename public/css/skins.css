@@ -64,3 +64,15 @@ label.error{
 .report-p{
 	font-size:16px;
 }
+
+
+/**
+ * User Management Panel
+ */
+.table-list{
+	list-style: none;
+}
+
+.pre-phone{
+	border-bottom:1px dotted black;
+}

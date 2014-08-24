@@ -40,14 +40,13 @@
 		</div>
 	</nav>
 
-	@if(isset($plainContainer))
+	
 	<div id="content" class="container">
-	@else
-	<div id="content" class="container page-effect">
-	@endif
-	@section('container')
+		<div class="row">
+			@section('container')
 
-	@show
+			@show
+		</div>
 	</div>
 
 	{{HTML::script('js/jquery-1.11.1.min.js')}}
