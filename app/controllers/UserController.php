@@ -68,9 +68,7 @@ class UserController extends BaseController {
 	 */
 	public function addUser(){
 
-		$email = Input::get("email");
-		$email = Input::get("email");
-
+		
 	}
 
 	/**

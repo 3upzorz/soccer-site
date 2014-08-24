@@ -8,86 +8,86 @@
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 				<h2 class="modal-title" id="add-user-modal-title">Add User</h2>
 			</div>
+			{{Form::open(
+				array(
+					'id'   => 'add-user-form',
+					'url'  => 'user/add',
+					'role' => 'form'
+				)
+			)}}
 			<div class="modal-body">
-				{{Form::open(
-					array(
-						'id'   => 'add-user-form',
-						'url'  => 'user/add',
-						'role' => 'form'
-					)
-				)}}
-					<div class="form-group">
-						<label for="username">Username</label>
-						<input id="username" class="form-control" type="text" name="username" placeholder="Enter Username"></input>
-					</div>
-					<div class="row">
-						<div class="col-sm-6">
-							<div class="form-group">
-								<label for="first-name">First Name</label>
-								<input id="first-name" class="form-control" type="text" name="firstName" placeholder="Enter First Name"></input>
-							</div>
-						</div>
-						<div class="col-sm-6">
-							<div class="form-group">
-								<label for="last-name">Last Name</label>
-								<input id="last-name" class="form-control" type="text" name="lastName" placeholder="Enter Last Name"></input>
-							</div>
+				<div class="form-group">
+					<label for="username">Username</label>
+					<input id="username" class="form-control" type="text" name="username" placeholder="Enter Username"></input>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="first-name">First Name</label>
+							<input id="first-name" class="form-control" type="text" name="firstName" placeholder="Enter First Name"></input>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="form-group">
-								<label for="password">Temporary Password</label>
-								<input id="password" class="form-control" type="password" name="password" placeholder="Enter a password"></input>
-							</div>
-						</div>
-						<div class="col-sm-12">
-							<div class="form-group">
-								<label for="confirm-password">Confirm Temporary Password</label>
-								<input id="confirm-password" class="form-control" type="password" name="confirmPassword" placeholder="Confirm password"></input>
-							</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="last-name">Last Name</label>
+							<input id="last-name" class="form-control" type="text" name="lastName" placeholder="Enter Last Name"></input>
 						</div>
 					</div>
-					<div class="form-group">
-						<h2>Permissions</h2>
-						<p>Please check all of the permissions that apply to the user being created</p>
-						<label for="check-all-permissions">
-							<input id="check-all-permissions" name="checkAllPermissions" type="checkbox"> Check All
-						</label>
-						<ul class="permission-list">
-							<li>
-								<label>
-									<input class="permission-check" name="permissions[]" value="1" type="checkbox"> Admin
-								</label>
-							</li>
-							<li>
-								<label>
-									<input class="permission-check" name="permissions[]" value="2" type="checkbox"> Referee
-								</label>
-							</li>
-							<li>
-								<label>
-									<input class="permission-check" name="permissions[]" value="3" type="checkbox"> Head Referee
-								</label>
-							</li>
-							<li>
-								<label>
-									<input class="permission-check" name="permissions[]" value="4" type="checkbox"> Mentor
-								</label>
-							</li>
-							<li>
-								<label>
-									<input class="permission-check" name="permissions[]" value="5" type="checkbox"> Scheduler
-								</label>
-							</li>
-						</ul>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="form-group">
+							<label for="password">Temporary Password</label>
+							<input id="password" class="form-control" type="password" name="password" placeholder="Enter a password"></input>
+						</div>
 					</div>
-				{{Form::close()}}
+					<div class="col-sm-12">
+						<div class="form-group">
+							<label for="confirm-password">Confirm Temporary Password</label>
+							<input id="confirm-password" class="form-control" type="password" name="confirmPassword" placeholder="Confirm password"></input>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<h2>Permissions</h2>
+					<p>Please check all of the permissions that apply to the user being created</p>
+					<label for="check-all-permissions">
+						<input id="check-all-permissions" name="checkAllPermissions" type="checkbox"> Check All
+					</label>
+					<ul class="permission-list">
+						<li>
+							<label>
+								<input class="permission-check" name="permissions[]" value="1" type="checkbox"> Admin
+							</label>
+						</li>
+						<li>
+							<label>
+								<input class="permission-check" name="permissions[]" value="2" type="checkbox"> Referee
+							</label>
+						</li>
+						<li>
+							<label>
+								<input class="permission-check" name="permissions[]" value="3" type="checkbox"> Head Referee
+							</label>
+						</li>
+						<li>
+							<label>
+								<input class="permission-check" name="permissions[]" value="4" type="checkbox"> Mentor
+							</label>
+						</li>
+						<li>
+							<label>
+								<input class="permission-check" name="permissions[]" value="5" type="checkbox"> Scheduler
+							</label>
+						</li>
+					</ul>
+				</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Add User</button>
+				<button class="btn btn-primary" form="add-user-form" type="submit">Add User</button>
 			</div>
+			{{Form::close()}}
 		</div>
 	</div>
 </div>
