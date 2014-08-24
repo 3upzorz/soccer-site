@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration {
 			$table->string("password");
 			$table->string("full_name");
 			$table->integer('user_type_id')->unsigned()->nullable();
+			$table->boolean('defaultPassword')->default(true);
 			$table->softDeletes();
 			$table->timestamps();
 			$table->string("remember_token");	
