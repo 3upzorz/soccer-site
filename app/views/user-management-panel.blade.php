@@ -57,15 +57,15 @@
 					<ul class="permission-list">
 						<li>
 							<label>
-								<input class="permission-check" name="permissions[]" value="1" type="checkbox"> Admin
+								<input class="permission-check" name="permissions[]" value="2" type="checkbox"> Admin
 							</label>
 						</li>
 						<li>
 							<label>
-								<input class="permission-check" name="permissions[]" value="2" type="checkbox"> Referee
+								<input class="permission-check" name="permissions[]" value="3" type="checkbox"> Referee
 							</label>
 						</li>
-						<li>
+						<!-- <li>
 							<label>
 								<input class="permission-check" name="permissions[]" value="3" type="checkbox"> Head Referee
 							</label>
@@ -79,7 +79,7 @@
 							<label>
 								<input class="permission-check" name="permissions[]" value="5" type="checkbox"> Scheduler
 							</label>
-						</li>
+						</li> -->
 					</ul>
 				</div>
 			</div>

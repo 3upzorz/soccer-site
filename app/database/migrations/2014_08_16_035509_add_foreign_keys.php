@@ -12,20 +12,20 @@ class AddForeignKeys extends Migration {
 	 */
 	public function up()
 	{
-		//
-		Schema::table('incidents', function($table){
-			$table->foreign('incident_type_id')->references('id')->on('incident_types');
-			$table->foreign('report_id')->references('id')->on('reports');
-		});
+		//TODO uncomment when db out of production
+		// Schema::table('incidents', function($table){
+		// 	$table->foreign('incident_type_id')->references('id')->on('incident_types');
+		// 	$table->foreign('report_id')->references('id')->on('reports');
+		// });
 		
-		Schema::table('reports',function($table){
-			$table->foreign('user_id')->references('id')->on('users');
-		});
+		// Schema::table('reports',function($table){
+		// 	$table->foreign('user_id')->references('id')->on('users');
+		// });
 
-		Schema::table('user_permissions',function($table){
-			$table->foreign('user_id')->references('id')->on('users');
-			$table->foreign('user_permission_type_id')->references('id')->on('user_permission_types');
-		});
+		// Schema::table('user_permissions',function($table){
+		// 	$table->foreign('user_id')->references('id')->on('users');
+		// 	$table->foreign('user_permission_type_id')->references('id')->on('user_permission_types');
+		// });
 	}
 
 	/**

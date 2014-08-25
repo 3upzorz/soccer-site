@@ -2,6 +2,9 @@
 
 class UserPermissionType extends Eloquent {
 
+	//No timestamps
+	public $timestamps = false;
+
 	/**
 	 * The database table used by the model.
 	 *

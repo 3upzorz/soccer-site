@@ -40,7 +40,7 @@ class UserController extends BaseController {
 	public function login(){
 
 		$credentials = array(
-			'email'    => Input::get("email"),
+			'username'    => Input::get("username"),
 			'password' => Input::get("password")
 		);
 
@@ -68,11 +68,37 @@ class UserController extends BaseController {
 	 */
 	public function addUser(){
 
-		$input = Input::all();
+		$username = Input::get('username');
+		$firstName = Input::get('firstName');
+		$lastName = Input::get('lastName');
+		$password = Input::get('password');
+		$confirmPassword = Input::get('confirmPassword');
+		$permissions = Input::get('permissions');
 
-		echo '<pre>';
-		var_dump($input);
-		echo '</pre>';
+		//TODO create custom rule to validate permissions
+		// Validator::extend('foo', function($attribute, $value, $parameters){
+		//     return $value == 'foo';
+		// });
+
+		$rules = array(
+			'username'        => 'required|unique:users,username',
+			'firstName'       => 'required|alpha',
+			'lastName'        => 'required|alpha',
+			'password'        => 'required',
+			'confirmPassword' => 'same:password'
+			'permissions'     => 
+		);
+
+		$user = new User;
+
+		$user->username = $username;
+		$user->first_name = $firstName;
+		$user->last_name = $lastName;
+		$user->password = Hash::make($password);
+
+		$user->save();
+
+		$user->permissions()->sync($permissions);
 	}
 
 	/**
@@ -80,6 +106,10 @@ class UserController extends BaseController {
 	 */
 	public function test(){
 
-		
+		$permissions = User::find(Auth::id())->permissions()->get()->toArray();
+
+		echo '<pre>';
+		var_dump($permissions);
+		echo '</pre>';
 	}
 }

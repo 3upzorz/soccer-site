@@ -14,6 +14,7 @@ class CreateUserPermissionsTable extends Migration {
 	{
 		//
 		Schema::create('user_permissions', function($table){
+			$table->increments('id');
 			$table->integer('user_id')->unsigned()->nullable();
 			$table->integer('user_permission_type_id')->unsigned()->nullable();
 		});
