@@ -18,14 +18,14 @@ class AddForeignKeys extends Migration {
 			$table->foreign('report_id')->references('id')->on('reports');
 		});
 		
-		Schema::table('users', function($table){
-			$table->foreign('user_type_id')->references('id')->on('user_types');
+		Schema::table('reports',function($table){
+			$table->foreign('user_id')->references('id')->on('users');
 		});
 
-		//TODO uncomment after login
-		// Schema::table('reports',function($table){
-		// 	$table->foreign('user_id')->references('id')->on('users');
-		// });
+		Schema::table('user_permissions',function($table){
+			$table->foreign('user_id')->references('id')->on('users');
+			$table->foreign('user_permission_type_id')->references('id')->on('user_permission_types');
+		});
 	}
 
 	/**

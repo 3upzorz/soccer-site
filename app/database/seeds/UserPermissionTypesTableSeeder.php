@@ -4,7 +4,7 @@ class UserTypesTableSeeder extends Seeder {
 
     public function run()
     {
-        DB::table('user_types')->delete();
+        DB::table('user_permission_types')->delete();
 
         $userType = new UserType;
 

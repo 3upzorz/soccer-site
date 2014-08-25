@@ -55,7 +55,7 @@ Route::filter('auth.basic', function()
 });
 
 /**
- * Checks that the user has at least referee level permission
+ * Checks that the user is a referee
  */
 Route::filter('isRef',function(){
 
@@ -79,7 +79,7 @@ Route::filter('isRef',function(){
 });
 
 /**
- * Checks that the user has at least admin level permission
+ * Checks that the user is an admin
  */
 Route::filter('isAdmin', function(){
 

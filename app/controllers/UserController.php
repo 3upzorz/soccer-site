@@ -68,10 +68,18 @@ class UserController extends BaseController {
 	 */
 	public function addUser(){
 
-		
+		$input = Input::all();
+
+		echo '<pre>';
+		var_dump($input);
+		echo '</pre>';
 	}
 
 	/**
 	 * 
 	 */
+	public function test(){
+
+		
+	}
 }

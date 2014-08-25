@@ -6,32 +6,39 @@ class UserTableSeeder extends Seeder {
     {
         DB::table('users')->delete();
 
-        User::create(
+        $user = User::create(
         	array(
-        		'email' => 'superuser@pcsa.com', 
-        		'password' => Hash::make('superuser'),
-        		'full_name' => 'Bob Dylan',
-        		'user_type_id' => 1
+        		'username' => 'superuser', 
+        		'password' => Hash::make('welcome'),
+        		'first_name' => 'Super',
+                'last_name' => 'User'
         	)
         );
 
-        User::create(
+        $user->permissions()->attach(1);
+
+        $user = User::create(
         	array(
-        		'email' => 'admin@pcsa.com', 
-        		'password' => Hash::make('admin'),
-        		'full_name' => 'Dylan Dylan',
-        		'user_type_id' => 2
-        	)
+                'username' => 'admin', 
+                'password' => Hash::make('welcome'),
+                'first_name' => 'Admin',
+                'last_name' => 'Administrator'
+            )
         );
 
-        User::create(
+        $user->permissions()->sync(array(2,3));
+        // $user->permissions()->attach(3);
+
+        $user = User::create(
         	array(
-        		'email' => 'ref@pcsa.com', 
-        		'password' => Hash::make('ref'),
-        		'full_name' => 'Dylan Bob',
-        		'user_type_id' => 3
-        	)
+                'username' => 'ref', 
+                'password' => Hash::make('welcome'),
+                'first_name' => 'Ref',
+                'last_name' => 'Referee'
+            )
         );
+
+        $user->permissions()->attach(3);
     }
 
 }
