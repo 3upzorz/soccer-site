@@ -76,7 +76,7 @@ class UserController extends BaseController {
 		$permissions = Input::get('permissions');
 
 		//TODO create custom rule to validate permissions
-		// Validator::extend('foo', function($attribute, $value, $parameters){
+		// Validator::extend('notEmpty', function($attribute, $value, $parameters){
 		//     return $value == 'foo';
 		// });
 
@@ -86,7 +86,6 @@ class UserController extends BaseController {
 			'lastName'        => 'required|alpha',
 			'password'        => 'required',
 			'confirmPassword' => 'same:password'
-			'permissions'     => 
 		);
 
 		$user = new User;
