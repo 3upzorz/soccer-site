@@ -93,7 +93,6 @@
 </div>
 <div class="col-md-12">
 	<h1>Manage Users</h1>
-	<?php $flashSuccess = Session::get('flashSuccess'); ?>
 	@if(isset($flashSuccess) && $flashSuccess)
 		<div class="bg-success">
 			<p>{{$flashSuccess}}</p>
@@ -114,7 +113,7 @@
 		</div>
 		<div class="col-md-12">
 			<h4>Quick Search</h4>
-			<form id="user-search-form" class="form-inline" action="" role="form" method="POST">
+			<form id="user-search-form" class="form-inline" action="" role="form" method="GET">
 				<div class="form-group">
 					<label class="sr-only" for="userName">Username</label>
 					<input type="text" class="form-control" id="search-user-name" name="userName" placeholder="Enter username">
@@ -153,78 +152,45 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td>thall</td>
-				<td>Hall, Trevor</td>
-				<td>trevdog55@hotmail.com</td>
-				<td>
-					<ul class="table-list">
-						<li><span class="pre-phone" title="Phone">P:</span> 604-233-9221</li>
-						<li><span class="pre-phone" title="Cell">C:</span> 778-327-8694</li>
-					</ul>
-				</td>
-				<td>
-					<ul class="table-list">
-						<li>Admin</li>
-						<li>Referee</li>
-					</ul>
-				</td>
-				<td><a href="#" class="clickable">View</a></td>
-				<td>
-					<ul class="icon-list">
-						<li><span class="glyphicon glyphicon-pencil edit-btn"></span></li>
-						<li><span class="glyphicon glyphicon-remove del-btn"></span></li>
-					</ul>
-				</td>
-			</tr>
-			<tr>
-				<td>thall</td>
-				<td>Hall, Trevor</td>
-				<td>trevdog55@hotmail.com</td>
-				<td>
-					<ul class="table-list">
-						<li><span class="pre-phone" title="Phone">P:</span> 604-233-9221</li>
-						<li><span class="pre-phone" title="Cell">C:</span> 778-327-8694</li>
-					</ul>
-				</td>
-				<td>
-					<ul class="table-list">
-						<li>Admin</li>
-						<li>Referee</li>
-					</ul>
-				</td>
-				<td><a href="#" class="clickable">View</a></td>
-				<td>
-					<ul class="icon-list">
-						<li><span class="glyphicon glyphicon-pencil edit-btn"></span></li>
-						<li><span class="glyphicon glyphicon-remove del-btn"></span></li>
-					</ul>
-				</td>
-			</tr>
-			<tr>
-				<td>thall</td>
-				<td>Hall, Trevor</td>
-				<td>trevdog55@hotmail.com</td>
-				<td>
-					<ul class="table-list">
-						<li><span class="pre-phone" title="Phone">P:</span> 604-233-9221</li>
-						<li><span class="pre-phone" title="Cell">C:</span> 778-327-8694</li>
-					</ul>
-				</td>
-				<td>
-					<ul class="table-list">
-						<li>Admin</li>
-						<li>Referee</li>
-					</ul>
-				</td>
-				<td><a href="#" class="clickable">View</a></td>
-				<td>
-					<ul class="icon-list">
-						<li><span class="glyphicon glyphicon-pencil edit-btn"></span></li>
-						<li><span class="glyphicon glyphicon-remove del-btn"></span></li>
-					</ul>
-				</td>
-			</tr>
+			@if($users && count($users) > 0)
+				@foreach($users as $user)
+				<tr>
+					<td>{{$user->username}}</td>
+					<td>{{$user->last_name . ', ' . $user->first_name}}</td>
+					<td>{{$user->email}}</td>
+					<td>
+						<ul class="table-list">
+							@if(isset($user->phone))
+							<li><span class="pre-phone" title="Phone">P:</span> $user->phone</li>
+							@endif
+							@if(isset($user->alt_phone))
+							<li><span class="pre-phone" title="Phone">P:</span> $user->alt_phone</li>
+							@endif
+						</ul>
+					</td>
+					<td>
+						<ul class="table-list">
+						@foreach($user->permissions()->get() as $permission)
+							<li>{{$permission->name}}</li>
+						@endforeach
+						</ul>
+					</td>
+					<td><a href="#" class="clickable">View</a></td>
+					<td>
+						<ul class="icon-list">
+							<li><span class="glyphicon glyphicon-pencil edit-btn"></span></li>
+							<li><span class="glyphicon glyphicon-remove del-btn"></span></li>
+						</ul>
+					</td>
+				</tr>
+				@endforeach
+			@else
+				<tr>
+					<td colspan="7">
+						No users found!
+					</td>
+				</tr>
+			@endif
 		</tbody>
 	</table>
 </div>

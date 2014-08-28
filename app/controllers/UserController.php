@@ -64,14 +64,61 @@ class UserController extends BaseController {
 	}
 
 	/**
+	 * Makes the User Management Panel View
+	 */
+	public function showManagementPanel(){
+		$flashSuccess = Session::get('flashSuccess');
+
+		$data = array(
+			'title' => 'PCSA - User Management'
+		);
+
+		if(isset($flashSuccess) && $flashSuccess){
+			$data['flashSuccess'] = $flashSuccess;
+		}
+
+		$criteria = array(
+			'username' => Input::get('userName'),
+			'email' => Input::get('email'),
+			'permission' => Input::get('userPermission'),
+		);
+
+		$data['users'] = $this->retrieveUsers($criteria);
+
+		return View::make('user-management-panel',$data);
+	}
+
+	/**
+	 * Retrieves users from the database
+	 * @param {Array} criteria : contains the criteria to filter users
+	 * 					=> {String} username : (optional),
+	 * 					=> {String} email : (optional),
+	 * 					=> {Int} permission : (optional)
+	 */
+	private function retrieveUsers($criteria){
+
+		$users = User::orderBy('created_at', 'desc');
+
+		if(isset($criteria['username']) && $criteria['username']){
+			$users->where('username', '=', $criteria['username']);
+		}
+
+		if(isset($criteria['email']) && $criteria['email']){
+			$users->where('email', '=', $criteria['email']);
+		}
+
+		return $users->get();
+	}
+
+	/**
 	 * Adds the user to the database
 	 */
 	public function addUser(){
 
 		$values = array(
-			'username' => trim(Input::get('username')),
-			'firstName' => trim(Input::get('firstName')),
-			'lastName' => trim(Input::get('lastName')),
+			'username' => strtolower(trim(Input::get('username'))),
+			'firstName' => strtolower(trim(Input::get('firstName'))),
+			'lastName' => strtolower(trim(Input::get('lastName'))),
 			'password' => Input::get('password'),
 			'confirmPassword' => Input::get('confirmPassword'),
 			'permissions' => Input::get('permissions')
