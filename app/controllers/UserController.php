@@ -68,36 +68,43 @@ class UserController extends BaseController {
 	 */
 	public function addUser(){
 
-		$username = Input::get('username');
-		$firstName = Input::get('firstName');
-		$lastName = Input::get('lastName');
-		$password = Input::get('password');
-		$confirmPassword = Input::get('confirmPassword');
-		$permissions = Input::get('permissions');
+		$values = array(
+			'username' => trim(Input::get('username')),
+			'firstName' => trim(Input::get('firstName')),
+			'lastName' => trim(Input::get('lastName')),
+			'password' => Input::get('password'),
+			'confirmPassword' => Input::get('confirmPassword'),
+			'permissions' => Input::get('permissions')
+		);
 
-		//TODO create custom rule to validate permissions
-		// Validator::extend('notEmpty', function($attribute, $value, $parameters){
-		//     return $value == 'foo';
-		// });
-
+		//TODO validate that permissions are actually permissions that exist in db
 		$rules = array(
 			'username'        => 'required|unique:users,username',
 			'firstName'       => 'required|alpha',
 			'lastName'        => 'required|alpha',
 			'password'        => 'required',
-			'confirmPassword' => 'same:password'
+			'confirmPassword' => 'same:password',
+			'permissions'	  => 'required'
 		);
 
-		$user = new User;
+		$validator = Validator::make($values,$rules);
 
-		$user->username = $username;
-		$user->first_name = $firstName;
-		$user->last_name = $lastName;
-		$user->password = Hash::make($password);
+		if($validator->fails()){
+			return Redirect::to('manage/users')->withErrors($validator)->withInput($values);
+		}else{
+			$user = new User;
 
-		$user->save();
+			$user->username = $values['username'];
+			$user->first_name = $values['firstName'];
+			$user->last_name = $values['lastName'];
+			$user->password = Hash::make($values['password']);
 
-		$user->permissions()->sync($permissions);
+			$user->save();
+
+			$user->permissions()->sync($values['permissions']);
+			Session::flash('flashSuccess', 'User successfully created');
+			return Redirect::to('manage/users');
+		}
 	}
 
 	/**

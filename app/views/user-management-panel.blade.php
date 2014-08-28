@@ -18,19 +18,19 @@
 			<div class="modal-body">
 				<div class="form-group">
 					<label for="username">Username</label>
-					<input id="username" class="form-control" type="text" name="username" placeholder="Enter Username"></input>
+					<input id="username" class="form-control" type="text" name="username" placeholder="Enter Username" value="{{Input::old('username')}}"></input>
 				</div>
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="first-name">First Name</label>
-							<input id="first-name" class="form-control" type="text" name="firstName" placeholder="Enter First Name"></input>
+							<input id="first-name" class="form-control" type="text" name="firstName" placeholder="Enter First Name" value="{{Input::old('firstName')}}"></input>
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="last-name">Last Name</label>
-							<input id="last-name" class="form-control" type="text" name="lastName" placeholder="Enter Last Name"></input>
+							<input id="last-name" class="form-control" type="text" name="lastName" placeholder="Enter Last Name" value="{{Input::old('lastName')}}"></input>
 						</div>
 					</div>
 				</div>
@@ -93,6 +93,21 @@
 </div>
 <div class="col-md-12">
 	<h1>Manage Users</h1>
+	<?php $flashSuccess = Session::get('flashSuccess'); ?>
+	@if(isset($flashSuccess) && $flashSuccess)
+		<div class="bg-success">
+			<p>{{$flashSuccess}}</p>
+		</div>
+	@endif
+	@if(count($errors->getMessages()) > 0)
+		<ul class="bg-danger">
+		@foreach($errors->getMessages() as $messageGroup)
+			@foreach($messageGroup as $message)
+				<li>{{$message}}</li>
+			@endforeach
+		@endforeach
+		</ul>
+	@endif
 	<div class="row">
 		<div class="col-md-12">
 			<button id="add-user-btn" class="btn btn-primary" data-toggle="modal" data-target="#add-user-modal">+ Add User</button>

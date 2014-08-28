@@ -179,29 +179,30 @@ $(function(){
 		$('#check-all-permissions').prop('checked',false);
 	});
 
-	$('#add-user-form').validate({
-		rules:{
-			username:"required",
-			firstName:"required",
-			lastName:"required",
-			password:"required",
-			confirmPassword:{
-				equalTo:"#password"
-			},
-			permissions:{
-				required:true
-			}
-		},
-		submitHandler:function(form){
-			//make sure at least one permission is checked before form submit
-			if($('.permission-check:checked').length > 0){
-				form.submit();
-			}else{
-				var errorHTML = '<label id="permissions-error" class="error" for="permissions">At least one permission must be selected.</label>';
-				$(errorHTML).insertAfter('.permission-list');
-			}
-		}
-	});
+	//TODO uncomment when finished testing
+	// $('#add-user-form').validate({
+	// 	rules:{
+	// 		username:"required",
+	// 		firstName:"required",
+	// 		lastName:"required",
+	// 		password:"required",
+	// 		confirmPassword:{
+	// 			equalTo:"#password"
+	// 		},
+	// 		permissions:{
+	// 			required:true
+	// 		}
+	// 	},
+	// 	submitHandler:function(form){
+	// 		//make sure at least one permission is checked before form submit
+	// 		if($('.permission-check:checked').length > 0){
+	// 			form.submit();
+	// 		}else{
+	// 			var errorHTML = '<label id="permissions-error" class="error" for="permissions">At least one permission must be selected.</label>';
+	// 			$(errorHTML).insertAfter('.permission-list');
+	// 		}
+	// 	}
+	// });
 
 /**
  * END USER MANAGEMENT PANEL
