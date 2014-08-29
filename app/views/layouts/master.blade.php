@@ -54,6 +54,7 @@
 	{{HTML::script('js/bootstrap-datepicker.js')}}
 	{{HTML::script('js/bootstrap-timepicker.js')}}
 	{{HTML::script('js/jquery.validate.js')}}
+	{{HTML::script('js/jquery.tablesorter.min.js')}}
 	{{HTML::script('js/soccer-site.js')}}
 </body>
 </html>

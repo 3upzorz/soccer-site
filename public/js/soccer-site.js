@@ -203,6 +203,31 @@ $(function(){
 	// 		}
 	// 	}
 	// });
+	
+	//add confirm dialog to user delete
+	$('.delete-user-form').submit(function(){
+		return confirm('Are you sure you want to delete this user?');
+	});
+
+	$('#users-table').tablesorter({
+		headers:{
+			3:{
+				sorter:false
+			},
+			4:{
+				sorter:false
+			},
+			5:{
+				sorter:false
+			},
+			6:{
+				sorter:false
+			},
+			7:{
+				sorter:false
+			}
+		}
+	});
 
 /**
  * END USER MANAGEMENT PANEL

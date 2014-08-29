@@ -13,6 +13,10 @@ label.error{
 	box-shadow: 10px 20px 10px grey;
 }
 
+.message-text{
+	font-weight:bold;
+}
+
 /**
  * Create reports page
  */
@@ -75,4 +79,13 @@ label.error{
 
 .pre-phone{
 	border-bottom:1px dotted black;
+}
+
+.hidden-submit-btn{
+	background: none;
+	border: none;
+}
+
+.link-style-btn{
+	text-decoration: underline;
 }

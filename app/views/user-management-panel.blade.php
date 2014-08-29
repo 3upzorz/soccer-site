@@ -65,21 +65,6 @@
 								<input class="permission-check" name="permissions[]" value="3" type="checkbox"> Referee
 							</label>
 						</li>
-						<!-- <li>
-							<label>
-								<input class="permission-check" name="permissions[]" value="3" type="checkbox"> Head Referee
-							</label>
-						</li>
-						<li>
-							<label>
-								<input class="permission-check" name="permissions[]" value="4" type="checkbox"> Mentor
-							</label>
-						</li>
-						<li>
-							<label>
-								<input class="permission-check" name="permissions[]" value="5" type="checkbox"> Scheduler
-							</label>
-						</li> -->
 					</ul>
 				</div>
 			</div>
@@ -87,7 +72,7 @@
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				<button class="btn btn-primary" form="add-user-form" type="submit">Add User</button>
 			</div>
-			{{Form::close()}}
+		{{Form::close()}}
 		</div>
 	</div>
 </div>
@@ -95,7 +80,26 @@
 	<h1>Manage Users</h1>
 	@if(isset($flashSuccess) && $flashSuccess)
 		<div class="bg-success">
-			<p>{{$flashSuccess}}</p>
+			@if(isset($deletedUserId) && $deletedUserId)
+			<p class="message-text">{{$flashSuccess}}</p>
+			{{Form::open(
+				array(
+					'id'   => 'restore-user-form',
+					'url'  => 'user/restore',
+					'role' => 'form'
+				)
+			)}}
+				<input type="hidden" name="userId" value="{{$deletedUserId}}"/>
+				<button type="submit" for="restore-user-form" class="hidden-submit-btn link-style-btn">Undo</button>
+			{{Form::close()}}
+			@else
+			<p class="message-text">{{$flashSuccess}}</p>
+			@endif
+		</div>
+	@endif
+	@if(isset($flashError) && $flashError)
+		<div class="bg-danger">
+			<p class="message-text">{{$flashError}}</p>
 		</div>
 	@endif
 	@if(count($errors->getMessages()) > 0)
@@ -116,29 +120,40 @@
 			<form id="user-search-form" class="form-inline" action="" role="form" method="GET">
 				<div class="form-group">
 					<label class="sr-only" for="userName">Username</label>
-					<input type="text" class="form-control" id="search-user-name" name="userName" placeholder="Enter username">
+					<input type="text" class="form-control" id="search-user-name" name="userName" placeholder="Enter username" value="{{$criteria['username']}}">
 				</div>
 				<div class="form-group">
 					<div class="input-group">
 						<div class="input-group-addon">@</div>
 						<label class="sr-only" for="email">Email</label>
-						<input id="search-email" class="form-control" name="email" type="email" placeholder="Enter email">
+						<input id="search-email" class="form-control" name="email" type="email" placeholder="Enter email" value="{{$criteria['email']}}">
 					</div>
 				</div>
+				@if(isset($permissions) && count($permissions) > 0)
 				<div class="form-group">
 					<label class="sr-only" for="userPermission">Permission</label>
 					<select id="search-user-permission" class="form-control" name="userPermission">
+						@if(isset($criteria['permission']) && $criteria['permission'])
+						<option value="def" disabled>Choose Permission</option>
+						@else
 						<option value="def" selected disabled>Choose Permission</option>
-						<option value="1">Admin</option>
-						<option value="2">Referee</option>
-						<option value="3">Head Referee</option>
+						@endif
+
+						@foreach($permissions as $permission)
+							@if($criteria['permission'] == $permission->id)
+							<option value="{{$permission->id}}" selected>{{{$permission->name}}}</option>
+							@else
+							<option value="{{$permission->id}}">{{{$permission->name}}}</option>
+							@endif
+						@endforeach
 					</select>
 				</div>
+				@endif
 				<button type="submit" form="user-search-form" class="btn btn-default">Search</button>
 			</form>
 		</div>
 	</div>
-	<table class="table table-striped">
+	<table id="users-table" class="table table-striped">
 		<thead>
 			<tr>
 				<th>Username</th>
@@ -146,7 +161,6 @@
 				<th>Email</th>
 				<th>Phone</th>
 				<th>Permissions</th>
-				<!-- <th>Age</th> -->
 				<th></th>
 				<th></th>
 			</tr>
@@ -178,8 +192,19 @@
 					<td><a href="#" class="clickable">View</a></td>
 					<td>
 						<ul class="icon-list">
-							<li><span class="glyphicon glyphicon-pencil edit-btn"></span></li>
-							<li><span class="glyphicon glyphicon-remove del-btn"></span></li>
+							<li><span class="glyphicon glyphicon-pencil edit-icon"></span></li>
+							<li>
+								{{Form::open(
+									array(
+										'class'   => 'delete-user-form',
+										'url'  => 'user/delete',
+										'role' => 'form'
+									)
+								)}}
+									<input type="hidden" name="userId" value="{{$user->id}}">
+									<button class="hidden-submit-btn"><span class="glyphicon glyphicon-remove del-icon"></span></button>
+								{{Form::close()}}
+							</li>
 						</ul>
 					</td>
 				</tr>

@@ -18,7 +18,6 @@ class UserPermissionType extends Eloquent {
 	 * @var array
 	 */
 
-	
 	// public function users(){
 	// 	return $this->belongsToMany("User","user_type_id");
 	// }

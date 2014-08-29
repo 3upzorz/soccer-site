@@ -68,6 +68,8 @@ class UserController extends BaseController {
 	 */
 	public function showManagementPanel(){
 		$flashSuccess = Session::get('flashSuccess');
+		$flashError = Session::get('flashError');
+		$deletedUserId = Session::get('deletedUserId');
 
 		$data = array(
 			'title' => 'PCSA - User Management'
@@ -77,15 +79,34 @@ class UserController extends BaseController {
 			$data['flashSuccess'] = $flashSuccess;
 		}
 
+		if(isset($deletedUserId) && $deletedUserId){
+			$data['deletedUserId'] = $deletedUserId;
+		}
+
+		if(isset($flashError) && $flashError){
+			$data['flashError'] = $flashError;
+		}
+
 		$criteria = array(
-			'username' => Input::get('userName'),
-			'email' => Input::get('email'),
+			'username' => strtolower(trim(Input::get('userName'))),
+			'email' => strtolower(trim(Input::get('email'))),
 			'permission' => Input::get('userPermission'),
 		);
 
+		$data['criteria'] = $criteria;
 		$data['users'] = $this->retrieveUsers($criteria);
+		$data['permissions'] = $this->getUserPermissionTypes();
 
 		return View::make('user-management-panel',$data);
+	}
+
+	/**
+	 * gets the user permission types to display
+	 */
+	private function getUserPermissionTypes(){
+		//get every user permissions type but the Super User permission
+		$permissions = UserPermissionType::where('id', '!=', 1)->get();
+		return $permissions;
 	}
 
 	/**
@@ -97,7 +118,7 @@ class UserController extends BaseController {
 	 */
 	private function retrieveUsers($criteria){
 
-		$users = User::orderBy('created_at', 'desc');
+		$users = User::orderBy('updated_at', 'desc');
 
 		if(isset($criteria['username']) && $criteria['username']){
 			$users->where('username', '=', $criteria['username']);
@@ -105,6 +126,12 @@ class UserController extends BaseController {
 
 		if(isset($criteria['email']) && $criteria['email']){
 			$users->where('email', '=', $criteria['email']);
+		}
+
+		if(isset($criteria['permission']) && $criteria['permission']){
+			$users->whereHas('permissions', function($q) use ($criteria){
+				$q->where('id', '=', $criteria['permission']);
+			});
 		}
 
 		return $users->get();
@@ -152,6 +179,42 @@ class UserController extends BaseController {
 			Session::flash('flashSuccess', 'User successfully created');
 			return Redirect::to('manage/users');
 		}
+	}
+
+	/**
+	 * Deletes the user
+	 */
+	public function deleteUser(){
+		$userId = Input::get('userId');
+
+		$user = User::find($userId);
+
+		//if user is a Super User
+		if($user->permissions->contains(1)){
+			
+			Session::flash('flashError', 'Cannot delete a user with permission Super User');
+			return Redirect::to('manage/users');
+		}
+
+		$user->delete();
+
+		Session::flash('deletedUserId', $userId);
+		Session::flash('flashSuccess', 'User deleted');
+		return Redirect::to('manage/users');
+	}
+
+	/**
+	 * Restore a deleted user
+	 */
+	public function restoreUser(){
+
+		$userId = Input::get('userId');
+
+		$user = User::onlyTrashed()->find($userId);
+		$user->restore();
+
+		Session::flash('flashSuccess', 'User restored');
+		return Redirect::to('manage/users');
 	}
 
 	/**

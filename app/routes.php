@@ -35,6 +35,8 @@ Route::group(array('before' => 'isAdmin'),function(){
 
 	Route::get('user/add', array('as' => 'add_user_view', 'uses' => 'UserController@addUserView'));
 	Route::post('user/add', array('as' => 'add_user', 'uses' => 'UserController@addUser'));
+	Route::post('user/delete', array('as' => 'delete_user', 'uses' => 'UserController@deleteUser'));
+	Route::post('user/restore', array('as' => 'restore_user', 'uses' => 'UserController@restoreUser'));
 
 	Route::get('manage/users', array('as' => 'user_management_panel', 'uses' => 'UserController@showManagementPanel'));
 });

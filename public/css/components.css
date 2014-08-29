@@ -10,6 +10,12 @@
 	padding-right:0px;
 }
 
+.message-text{
+	text-align: center;
+	font-size:14px;
+	margin-bottom:0px;
+}
+
 /**
  * Login page
  */
@@ -88,15 +94,27 @@
 	padding:0px 3px;
 }
 
-.edit-btn{
+.edit-icon{
 	cursor:pointer;
 }
 
-.del-btn{
+.del-icon{
 	cursor:pointer;
 	color:#EB4A4A;
 }
 
 .clickable{
 	cursor:pointer;
+}
+
+.del-btn{
+	padding: 0px;
+}
+
+.bg-success{
+	text-align: center;
+}
+
+.bg-success > *{
+	display:inline-block;
 }
