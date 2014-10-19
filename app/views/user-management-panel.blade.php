@@ -26,13 +26,13 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="first-name">First Name</label>
-							<input id="first-name" class="form-control" type="text" name="firstName" placeholder="Enter First Name" value="<?php if(isset($addPopulate)) echo Input::old('firstName')?>">
+							<input id="first-name" class="form-control" type="text" name="first_name" placeholder="Enter First Name" value="<?php if(isset($addPopulate)) echo Input::old('first_name')?>">
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="last-name">Last Name</label>
-							<input id="last-name" class="form-control" type="text" name="lastName" placeholder="Enter Last Name" value="<?php if(isset($addPopulate)) echo Input::old('lastName') ?>">
+							<input id="last-name" class="form-control" type="text" name="last_name" placeholder="Enter Last Name" value="<?php if(isset($addPopulate)) echo Input::old('last_name') ?>">
 						</div>
 					</div>
 				</div>
@@ -98,13 +98,13 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="edit-first-name">First Name</label>
-							<input id="edit-first-name" class="form-control" type="text" name="firstName" placeholder="Enter First Name">
+							<input id="edit-first-name" class="form-control" type="text" name="first_name" placeholder="Enter First Name">
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="edit-last-name">Last Name</label>
-							<input id="edit-last-name" class="form-control" type="text" name="lastName" placeholder="Enter Last Name">
+							<input id="edit-last-name" class="form-control" type="text" name="last_name" placeholder="Enter Last Name">
 						</div>
 					</div>
 				</div>
@@ -279,10 +279,10 @@
 					<td>
 						<ul class="table-list">
 							@if(isset($user->phone))
-							<li><span class="pre-phone" title="Phone">P:</span> $user->phone</li>
+							<li><span class="pre-phone" title="Phone">P:</span> {{$user->phone}}</li>
 							@endif
 							@if(isset($user->alt_phone))
-							<li><span class="pre-phone" title="Phone">P:</span> $user->alt_phone</li>
+							<li><span class="pre-phone" title="Alt Phone">A:</span> {{$user->alt_phone}}</li>
 							@endif
 						</ul>
 					</td>

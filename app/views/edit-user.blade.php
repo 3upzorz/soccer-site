@@ -16,8 +16,46 @@
 		'role' => 'form'
 	)
 ); ?>
+<input type="hidden" name="user_id" value="{{$user->id}}" />
 <div class="col-md-12">
 	<h1>Edit User</h1>
+	<?php 
+		$flashSuccess = Session::get('flashSuccess');
+		$flashError = Session::get('flashError');
+	?>
+	@if(isset($flashSuccess) && $flashSuccess)
+		<div class="bg-success">
+			@if(isset($deletedUserId) && $deletedUserId)
+			<p class="message-text">{{$flashSuccess}}</p>
+			{{Form::open(
+				array(
+					'id'   => 'restore-user-form',
+					'url'  => 'user/restore',
+					'role' => 'form'
+				)
+			)}}
+				<input type="hidden" name="userId" value="{{$deletedUserId}}"/>
+				<button type="submit" for="restore-user-form" class="hidden-submit-btn link-style-btn">Undo</button>
+			{{Form::close()}}
+			@else
+			<p class="message-text">{{$flashSuccess}}</p>
+			@endif
+		</div>
+	@endif
+	@if(isset($flashError) && $flashError)
+		<div class="bg-danger">
+			<p class="message-text">{{$flashError}}</p>
+		</div>
+	@endif
+	@if(count($errors->getMessages()) > 0)
+		<ul class="bg-danger">
+		@foreach($errors->getMessages() as $messageGroup)
+			@foreach($messageGroup as $message)
+				<li>{{$message}}</li>
+			@endforeach
+		@endforeach
+		</ul>
+	@endif
 	<h3>Profile</h3>
 	<div class="row">
 		<div class="col-sm-6">

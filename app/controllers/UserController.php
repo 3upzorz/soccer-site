@@ -164,15 +164,16 @@ class UserController extends BaseController {
 	 * @param {Array} input : the input from the front end form
 	 * @param {Bool} required (optional) : should all of the important fields be considered required
 	 * @param {Bool} passwordSent (optional) : is there a password that needs to be validated
+	 * @param {Bool} update (optional) : validating info for a user update
 	 */
-	private function validateUserInput($input, $required = true, $passwordSent = true){
+	private function validateUserInput($input, $required = true, $passwordSent = true, $update = false){
 
 		$values = array(
 			'username' => (isset($input['username']) ? strtolower(trim($input['username'])) : null),
-			'firstName' => (isset($input['firstName']) ? strtolower(trim($input['firstName'])) : null),
-			'lastName' => (isset($input['lastName']) ? strtolower(trim($input['lastName'])) : null),
+			'first_name' => (isset($input['first_name']) ? strtolower(trim($input['first_name'])) : null),
+			'last_name' => (isset($input['last_name']) ? strtolower(trim($input['last_name'])) : null),
 			'password' => (isset($input['password']) ? $input['password'] : null),
-			'confirmPassword' => (isset($input['permissions']) ? $input['confirmPassword'] : null),
+			'confirmPassword' => (isset($input['confirmPassword']) ? $input['confirmPassword'] : null),
 			'permissions' => (isset($input['permissions']) ? $input['permissions'] : null)
 		);
 
@@ -181,21 +182,28 @@ class UserController extends BaseController {
 		if($required){
 			$rules = array(
 				'username'        => 'required|unique:users,username',
-				'firstName'       => 'required|alpha',
-				'lastName'        => 'required|alpha',
+				'first_name'       => 'required|alpha',
+				'last_name'        => 'required|alpha',
 				'password'        => 'required',
 				'permissions'	  => 'required'
 			);
 		}else{
 			$rules = array(
 				'username'        => 'unique:users,username',
-				'firstName'       => 'alpha',
-				'lastName'        => 'alpha',
+				'first_name'       => 'alpha',
+				'last_name'        => 'alpha',
 			);
 		}
 
 		if($passwordSent){
 			$rules['confirmPassword'] = 'same:password';
+		}
+
+		if($update){
+			$rules['user_id'] = 'required|exists:users,id';
+			$rules['email'] = 'email';
+			$values['user_id'] = (isset($input['user_id']) ? $input['user_id'] : null);
+			$values['email'] = (isset($input['email']) ? $input['email'] : null);
 		}
 
 		return Validator::make($values,$rules);
@@ -215,8 +223,8 @@ class UserController extends BaseController {
 			$user = new User;
 
 			$user->username = $input['username'];
-			$user->first_name = $input['firstName'];
-			$user->last_name = $input['lastName'];
+			$user->first_name = $input['first_name'];
+			$user->last_name = $input['last_name'];
 			$user->password = Hash::make($input['password']);
 
 			$user->save();
@@ -228,17 +236,120 @@ class UserController extends BaseController {
 	}
 
 	/**
-	 * TODO
-	 * Edits an existing user
+	 * Edits an existing user with updated profile information
 	 */
 	public function editUser(){
+		$input = Input::all();
+		// echo '<pre>';
+		// var_dump($input);
+		// echo '</pre>';
+		// die();
 
-		$validator = $this->validateUserInput(Input::all(),false,false);
+		//validate input, but none of the input is required and there is no password needed to be validated
+		//and the purpose is for updating
+		$validator = $this->validateUserInput($input,false,false,true);
 
 		if($validator->fails()){
-			return Redirect::to('manage/users')->withErrors($validator)->withInput();
+			return Redirect::to('user/edit/' . $input['user_id'])->withErrors($validator)->withInput();
 		}else{
-			echo 'no fail';
+
+			$this->updateUser($input['user_id'],$input);
+			Session::flash('flashSuccess', 'User successfully updated');
+			return Redirect::to('user/edit/' . $input['user_id']);
+		}
+	}
+
+	/**
+	 * A function to update a user based on given input
+	 */
+	private function updateUser($userId, $input){
+
+		//TODO handle failure of user find
+		//See:
+		//http://laravel.com/docs/4.2/eloquent#basic-usage
+		//Retrieving A Model By Primary Key Or Throw An Exception
+		$user = User::findOrFail($userId);
+		$changed = false;
+
+		foreach ($input as $key => $value) {
+			//if field exists
+			if(isset($user->$key)){
+				if($value === ""){
+					$value = null;
+				}
+				//if field and value are not the same, update field
+				if($user->$key !== $value){
+					$user->$key = $value;
+					$changed = true;
+				}
+			}
+		}
+
+		// if(isset($input['first_name']) && $input['first_name']){
+		// 	$user->first_name = $input['first_name'];
+		// 	$changed = true;
+		// }
+
+		// if(isset($input['last_name']) && $input['last_name']){
+		// 	$user->last_name = $input['last_name'];
+		// 	$changed = true;
+		// }
+
+		// if(isset($input['email']) && $input['email']){
+		// 	$user->email = $input['email'];
+		// 	$changed = true;
+		// }
+
+		// if(isset($input['phone']) && $input['phone']){
+		// 	$user->phone = $input['phone'];
+		// 	$changed = true;
+		// }
+
+		// if(isset($input['alt_phone']) && $input['alt_phone']){
+		// 	$user->alt_phone = $input['alt_phone'];
+		// 	$changed = true;
+		// }
+
+		// if(isset($input['notes']) && $input['notes']){
+		// 	$user->notes = $input['notes'];
+		// 	$changed = true;
+		// }
+
+		// if(isset($input['address_line_1']) && $input['address_line_1']){
+		// 	$user->address_line_1 = $input['address_line_1'];
+		// 	$changed = true;
+		// }
+
+		// if(isset($input['address_line_2']) && $input['address_line_2']){
+		// 	$user->address_line_2 = $input['address_line_2'];
+		// 	$changed = true;
+		// }
+
+		// if(isset($input['city']) && $input['city']){
+		// 	$user->city = $input['city'];
+		// 	$changed = true;
+		// }
+
+		// if(isset($input['province']) && $input['province']){
+		// 	$user->province = $input['province'];
+		// 	$changed = true;
+		// }
+
+		// if(isset($input['country']) && $input['country']){
+		// 	$user->country = $input['country'];
+		// 	$changed = true;
+		// }
+
+		// if(isset($input['postal_code']) && $input['postal_code']){
+		// 	$user->postal_code = $input['postal_code'];
+		// 	$changed = true;
+		// }
+
+		//TODO update permissions
+
+		//if something was changed, save the user
+		if($changed){
+			$user->save();
 		}
 	}
 
@@ -281,17 +392,5 @@ class UserController extends BaseController {
 			return Redirect::to('manage/users?deleted=1');
 		}
 		return Redirect::to('manage/users');
-	}
-
-	/**
-	 * 
-	 */
-	public function test(){
-
-		$permissions = User::find(Auth::id())->permissions()->get()->toArray();
-
-		echo '<pre>';
-		var_dump($permissions);
-		echo '</pre>';
 	}
 }
