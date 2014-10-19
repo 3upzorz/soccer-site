@@ -179,30 +179,29 @@ $(function(){
 		$('#check-all-permissions').prop('checked',false);
 	});
 
-	//TODO uncomment when finished testing
-	// $('#add-user-form').validate({
-	// 	rules:{
-	// 		username:"required",
-	// 		firstName:"required",
-	// 		lastName:"required",
-	// 		password:"required",
-	// 		confirmPassword:{
-	// 			equalTo:"#password"
-	// 		},
-	// 		permissions:{
-	// 			required:true
-	// 		}
-	// 	},
-	// 	submitHandler:function(form){
-	// 		//make sure at least one permission is checked before form submit
-	// 		if($('.permission-check:checked').length > 0){
-	// 			form.submit();
-	// 		}else{
-	// 			var errorHTML = '<label id="permissions-error" class="error" for="permissions">At least one permission must be selected.</label>';
-	// 			$(errorHTML).insertAfter('.permission-list');
-	// 		}
-	// 	}
-	// });
+	$('#add-user-form').validate({
+		rules:{
+			username:"required",
+			first_name:"required",
+			last_name:"required",
+			password:"required",
+			confirmPassword:{
+				equalTo:"#password"
+			},
+			permissions:{
+				required:true
+			}
+		},
+		submitHandler:function(form){
+			//make sure at least one permission is checked before form submit
+			if($('.permission-check:checked').length > 0){
+				form.submit();
+			}else{
+				var errorHTML = '<label id="permissions-error" class="error" for="permissions">At least one permission must be selected.</label>';
+				$(errorHTML).insertAfter('.permission-list');
+			}
+		}
+	});
 	
 	//add confirm dialog to user delete
 	$('.delete-user-form').submit(function(){
@@ -233,8 +232,36 @@ $(function(){
  * END USER MANAGEMENT PANEL
  */
 
+/**
+ * EDIT USER PAGE
+ */
+
+	$('#edit-user-form').validate({
+		rules:{
+			first_name:"required",
+			last_name:"required",
+			permissions:{
+				required:true
+			}
+		},
+		submitHandler:function(form){
+			//make sure at least one permission is checked before form submit
+			if($('.edit-permission-check:checked').length > 0){
+				form.submit();
+			}else{
+				var errorHTML = '<label id="permissions-error" class="error" for="permissions">At least one permission must be selected.</label>';
+				$(errorHTML).insertAfter('.permission-list');
+			}
+		}
+	});
+
+/**
+ * END EDIT USER PAGE
+ */
+
 /** 
  * ADD USER PAGE
+ * TODO remove because this page has been replaced by modal
  */
 
  	//check/uncheck boxes if the check all box is checked

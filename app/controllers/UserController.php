@@ -272,10 +272,13 @@ class UserController extends BaseController {
 		$user = User::findOrFail($userId);
 		$changed = false;
 
+		//keys to ingore in input
+		$ignore = array('permissions', '_token', 'user_id');
+
 		//for every input field
 		foreach ($input as $key => $value) {
 			//check field exists
-			if(isset($user->$key)){
+			if(!in_array($key, $ignore)){
 				if($value === ""){
 					$value = null;
 				}
@@ -289,41 +292,8 @@ class UserController extends BaseController {
 
 		if(isset($input['permissions'])){
 			$user->permissions()->sync($input['permissions']);
+			$changed = true;
 		}
-
-		//create 2 arrays indexed by the permission id	
-		// $inputPermissionArr = array();
-		// $userPermissionArr = array();
-
-		// foreach ($input['permissions'] as $permission) {
-		// 	$inputPermissionArr[(int)$permission] = true;
-		// }
-
-		// foreach ($user->permissions as $userPermission) {
-		// 	$userPermissionArr[(int)$userPermission->id] = true;
-		// }
-
-		// //loop through all the permissions to remove the permissions that have been unchecked
-		// //and add permissions that have been checked
-		// foreach ($input['permissions'] as $permission) {
-
-		// 	$permissionId = (int) $permission;
-		// 	//if it exists in the input, but not in the user
-		// 	if(isset($inputPermissionArr[$permissionId]) && !isset($userPermissionArr[$permissionId])){
-		// 		//add permission
-		// 		$user->permissions()->attach($permissionId);
-		// 	}
-		// 	//if it exists in the user, but not the input
-		// 	elseif(!isset($inputPermissionArr[$permissionId]) && isset($userPermissionArr[$permissionId])){
-		// 		//remove permission
-		// 		$user->permissions()->detach($permissionId);
-		// 	}
-		// 	//else the permission exists in both
-		// 	else{
-		// 		//so we don't do anything!
-		// 	}
-		// }
-
 
 		//if something was changed, save the user
 		if($changed){
