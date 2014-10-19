@@ -22,7 +22,6 @@ class CreateUsersTable extends Migration {
 			$table->string("phone")->nullable();
 			$table->string("alt_phone")->nullable();
 			$table->text("notes")->nullable();
-			// $table->integer('user_type_id')->unsigned()->nullable();
 			$table->boolean('default_password')->default(true);
 			$table->softDeletes();
 			$table->timestamps();

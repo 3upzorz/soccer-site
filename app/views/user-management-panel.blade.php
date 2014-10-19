@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('container')
+<!-- START ADD USER MODAL -->
 <div id="add-user-modal" class="modal fade" tab-index="-1" role="dialog" aria-labelledby="addUserModal" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
@@ -15,22 +16,23 @@
 					'role' => 'form'
 				)
 			)}}
+			<?php $addPopulate = Session::get('addPopulate') ?>
 			<div class="modal-body">
 				<div class="form-group">
 					<label for="username">Username</label>
-					<input id="username" class="form-control" type="text" name="username" placeholder="Enter Username" value="{{Input::old('username')}}"></input>
+					<input id="username" class="form-control" type="text" name="username" placeholder="Enter Username" value="<?php if(isset($addPopulate)) echo Input::old('username') ?>">
 				</div>
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="first-name">First Name</label>
-							<input id="first-name" class="form-control" type="text" name="firstName" placeholder="Enter First Name" value="{{Input::old('firstName')}}"></input>
+							<input id="first-name" class="form-control" type="text" name="firstName" placeholder="Enter First Name" value="<?php if(isset($addPopulate)) echo Input::old('firstName')?>">
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="last-name">Last Name</label>
-							<input id="last-name" class="form-control" type="text" name="lastName" placeholder="Enter Last Name" value="{{Input::old('lastName')}}"></input>
+							<input id="last-name" class="form-control" type="text" name="lastName" placeholder="Enter Last Name" value="<?php if(isset($addPopulate)) echo Input::old('lastName') ?>">
 						</div>
 					</div>
 				</div>
@@ -38,33 +40,30 @@
 					<div class="col-sm-12">
 						<div class="form-group">
 							<label for="password">Temporary Password</label>
-							<input id="password" class="form-control" type="password" name="password" placeholder="Enter a password"></input>
+							<input id="password" class="form-control" type="password" name="password" placeholder="Enter a password">
 						</div>
 					</div>
 					<div class="col-sm-12">
 						<div class="form-group">
 							<label for="confirm-password">Confirm Temporary Password</label>
-							<input id="confirm-password" class="form-control" type="password" name="confirmPassword" placeholder="Confirm password"></input>
+							<input id="confirm-password" class="form-control" type="password" name="confirmPassword" placeholder="Confirm password">
 						</div>
 					</div>
 				</div>
 				<div class="form-group">
-					<h2>Permissions</h2>
+					<h3>Permissions</h3>
 					<p>Please check all of the permissions that apply to the user being created</p>
 					<label for="check-all-permissions">
 						<input id="check-all-permissions" name="checkAllPermissions" type="checkbox"> Check All
 					</label>
 					<ul class="permission-list">
+						@foreach($permissions as $permission)
 						<li>
 							<label>
-								<input class="permission-check" name="permissions[]" value="2" type="checkbox"> Admin
+								<input class="permission-check" name="permissions[]" value="{{$permission->id}}" type="checkbox"> {{$permission->name}}
 							</label>
 						</li>
-						<li>
-							<label>
-								<input class="permission-check" name="permissions[]" value="3" type="checkbox"> Referee
-							</label>
-						</li>
+						@endforeach
 					</ul>
 				</div>
 			</div>
@@ -76,6 +75,103 @@
 		</div>
 	</div>
 </div>
+<!-- END ADD USER MODAL -->
+
+<!-- START EDIT USER MODAL -->
+<div id="edit-user-modal" class="modal fade" tab-index="-1" role="dialog" aria-labelledby="editUserModal" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h2 class="modal-title" id="edit-user-modal-title">Edit User</h2>
+			</div>
+			{{Form::open(
+				array(
+					'id'   => 'edit-user-form',
+					'url'  => 'user/edit',
+					'role' => 'form'
+				)
+			)}}
+			<div class="modal-body">
+				<h3>Profile</h3>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="edit-first-name">First Name</label>
+							<input id="edit-first-name" class="form-control" type="text" name="firstName" placeholder="Enter First Name">
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="edit-last-name">Last Name</label>
+							<input id="edit-last-name" class="form-control" type="text" name="lastName" placeholder="Enter Last Name">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="edit-phone-number">Phone Number</label>
+							<input id="edit-phone-number" class="form-control" type="text" name="phoneNumber" placeholder="Enter Phone Number">
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="edit-phone-number-alt">Alt. Phone Number</label>
+							<input id="edit-phone-number-alt" class="form-control" type="text" name="phoneNumberAlt" placeholder="Enter Phone Number">
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="edit-email">Email</label>
+					<input id="edit-email" class="form-control" type="email" name="email" placeholder="Enter email">
+				</div>
+				<h3>Address</h3>
+				<div class="form-group">
+					<label for="edit-address-line-1">Address Line 1</label>
+					<input id="edit-address-line-1" class="form-control" type="text" name="email" placeholder="Enter street address">
+				</div>
+				<div class="form-group">
+					<label for="edit-address-line-2">Address Line 2 (Optional)</label>
+					<input id="edit-address-line-2" class="form-control" type="text" name="email" placeholder="Enter additional address info, e.g. apt number">
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="edit-phone-number-alt">Alt. Phone Number</label>
+							<input id="edit-phone-number-alt" class="form-control" type="text" name="phoneNumberAlt" placeholder="Enter Phone Number">
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="edit-postal-code">Postal Code</label>
+							<input id="edit-postal-code" class="form-control" type="text" name="postalCode" placeholder="Enter Postal Code e.g. V3C2B3">
+						</div>
+					</div>
+				</div>
+				<h3>Permissions</h3>
+				<div class="form-group">
+					<ul class="permission-list">
+						@foreach($permissions as $permission)
+						<li>
+							<label>
+								<input class="edit-permission-check" name="permissions[]" value="{{$permission->id}}" type="checkbox"> {{$permission->name}}
+							</label>
+						</li>
+						@endforeach
+					</ul>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button class="btn btn-success" form="edit-user-form" type="submit">Save User</button>
+			</div>
+			{{Form::close()}}
+		</div>
+	</div>
+</div>
+<!-- END EDIT USER MODAL -->
+
 <div class="col-md-12">
 	<h1>Manage Users</h1>
 	@if(isset($flashSuccess) && $flashSuccess)
@@ -134,9 +230,9 @@
 					<label class="sr-only" for="userPermission">Permission</label>
 					<select id="search-user-permission" class="form-control" name="userPermission">
 						@if(isset($criteria['permission']) && $criteria['permission'])
-						<option value="def" disabled>Choose Permission</option>
+						<option value="">Choose Permission</option>
 						@else
-						<option value="def" selected disabled>Choose Permission</option>
+						<option value="" selected>Choose Permission</option>
 						@endif
 
 						@foreach($permissions as $permission)
@@ -149,8 +245,16 @@
 					</select>
 				</div>
 				@endif
+				@if(isset($criteria['deleted']) && $criteria['deleted'])
+				<input name="deleted" type="hidden" value="1">
+				@endif
 				<button type="submit" form="user-search-form" class="btn btn-default">Search</button>
 			</form>
+			@if(isset($criteria['deleted']) && $criteria['deleted'])
+			{{link_to_route('user_management_panel', 'View active users', $parameters = array(), $attributes = array());}}
+			@else
+			{{link_to_route('user_management_panel', 'View deleted users', $parameters = array('deleted'=>1), $attributes = array());}}
+			@endif
 		</div>
 	</div>
 	<table id="users-table" class="table table-striped">
@@ -192,7 +296,25 @@
 					<td><a href="#" class="clickable">View</a></td>
 					<td>
 						<ul class="icon-list">
-							<li><span class="glyphicon glyphicon-pencil edit-icon"></span></li>
+							<!-- if looking at deleted users, display a button to restore that user -->
+							@if(isset($criteria['deleted']) && $criteria['deleted'])
+							<li>
+								{{Form::open(
+									array(
+										'class'   => 'restore-user-form',
+										'url'  => 'user/restore',
+										'role' => 'form'
+									)
+								)}}
+									<input type="hidden" name="userId" value="{{$user->id}}"/>
+									<input type="hidden" name="deleted" value="1"/>
+									<button class="hidden-submit-btn"><span class="glyphicon glyphicon-ok restore click-icon"></span></button>
+								{{Form::close()}}
+							</li>
+							@else
+							<!-- <button id="add-user-btn" class="btn btn-primary" >+ Add User</button> -->
+							<!-- <li><span class="glyphicon glyphicon-pencil edit click-icon" data-toggle="modal" data-target="#edit-user-modal"></span></li> -->
+							<li><a href="{{url('user/edit',array($user->id))}}"><span class="glyphicon glyphicon-pencil edit click-icon"></span></a></li>
 							<li>
 								{{Form::open(
 									array(
@@ -202,9 +324,11 @@
 									)
 								)}}
 									<input type="hidden" name="userId" value="{{$user->id}}">
-									<button class="hidden-submit-btn"><span class="glyphicon glyphicon-remove del-icon"></span></button>
+									<button class="hidden-submit-btn"><span class="glyphicon glyphicon-remove del click-icon"></span></button>
 								{{Form::close()}}
 							</li>
+							@endif
+							
 						</ul>
 					</td>
 				</tr>

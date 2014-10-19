@@ -94,13 +94,8 @@
 	padding:0px 3px;
 }
 
-.edit-icon{
+.click-icon{
 	cursor:pointer;
-}
-
-.del-icon{
-	cursor:pointer;
-	color:#EB4A4A;
 }
 
 .clickable{

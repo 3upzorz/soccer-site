@@ -7,7 +7,20 @@ class UserController extends BaseController {
 	 */
 	public function addUserView(){
 
-		return View::make('add-user', array('title' => 'PCSA - Add User', ));
+		return View::make('add-user', array('title' => 'PCSA - Add User'));
+	}
+
+	/**
+	 * Makes the edit user view
+	 */
+	public function editView($userId){
+
+		$data = array(
+			'title' => 'PCSA - Edit User',
+			'user'  => User::find($userId),
+			'permissions' => $this->getUserPermissionTypes()
+		);
+		return View::make('edit-user', $data);
 	}
 
 	/**
@@ -91,6 +104,7 @@ class UserController extends BaseController {
 			'username' => strtolower(trim(Input::get('userName'))),
 			'email' => strtolower(trim(Input::get('email'))),
 			'permission' => Input::get('userPermission'),
+			'deleted' => Input::get('deleted')
 		);
 
 		$data['criteria'] = $criteria;
@@ -118,7 +132,14 @@ class UserController extends BaseController {
 	 */
 	private function retrieveUsers($criteria){
 
-		$users = User::orderBy('updated_at', 'desc');
+		$users;
+		if(isset($criteria['deleted']) && $criteria['deleted']){
+
+			$users = User::onlyTrashed()->orderBy('updated_at', 'desc');
+		}else{
+
+			$users = User::orderBy('updated_at', 'desc');	
+		}
 
 		if(isset($criteria['username']) && $criteria['username']){
 			$users->where('username', '=', $criteria['username']);
@@ -138,46 +159,86 @@ class UserController extends BaseController {
 	}
 
 	/**
+	 * creates a larvel validator that can be used to test valid input and get errors 
+	 * will default to add user validation behavior
+	 * @param {Array} input : the input from the front end form
+	 * @param {Bool} required (optional) : should all of the important fields be considered required
+	 * @param {Bool} passwordSent (optional) : is there a password that needs to be validated
+	 */
+	private function validateUserInput($input, $required = true, $passwordSent = true){
+
+		$values = array(
+			'username' => (isset($input['username']) ? strtolower(trim($input['username'])) : null),
+			'firstName' => (isset($input['firstName']) ? strtolower(trim($input['firstName'])) : null),
+			'lastName' => (isset($input['lastName']) ? strtolower(trim($input['lastName'])) : null),
+			'password' => (isset($input['password']) ? $input['password'] : null),
+			'confirmPassword' => (isset($input['permissions']) ? $input['confirmPassword'] : null),
+			'permissions' => (isset($input['permissions']) ? $input['permissions'] : null)
+		);
+
+		//TODO validate that permissions are actually permissions that exist in db
+		$rules;
+		if($required){
+			$rules = array(
+				'username'        => 'required|unique:users,username',
+				'firstName'       => 'required|alpha',
+				'lastName'        => 'required|alpha',
+				'password'        => 'required',
+				'permissions'	  => 'required'
+			);
+		}else{
+			$rules = array(
+				'username'        => 'unique:users,username',
+				'firstName'       => 'alpha',
+				'lastName'        => 'alpha',
+			);
+		}
+
+		if($passwordSent){
+			$rules['confirmPassword'] = 'same:password';
+		}
+
+		return Validator::make($values,$rules);
+	}
+
+	/**
 	 * Adds the user to the database
 	 */
 	public function addUser(){
 
-		$values = array(
-			'username' => strtolower(trim(Input::get('username'))),
-			'firstName' => strtolower(trim(Input::get('firstName'))),
-			'lastName' => strtolower(trim(Input::get('lastName'))),
-			'password' => Input::get('password'),
-			'confirmPassword' => Input::get('confirmPassword'),
-			'permissions' => Input::get('permissions')
-		);
-
-		//TODO validate that permissions are actually permissions that exist in db
-		$rules = array(
-			'username'        => 'required|unique:users,username',
-			'firstName'       => 'required|alpha',
-			'lastName'        => 'required|alpha',
-			'password'        => 'required',
-			'confirmPassword' => 'same:password',
-			'permissions'	  => 'required'
-		);
-
-		$validator = Validator::make($values,$rules);
+		$input = Input::all();
+		$validator = $this->validateUserInput($input);
 
 		if($validator->fails()){
-			return Redirect::to('manage/users')->withErrors($validator)->withInput($values);
+			return Redirect::to('manage/users')->with('addPopulate', true)->withErrors($validator)->withInput();
 		}else{
 			$user = new User;
 
-			$user->username = $values['username'];
-			$user->first_name = $values['firstName'];
-			$user->last_name = $values['lastName'];
-			$user->password = Hash::make($values['password']);
+			$user->username = $input['username'];
+			$user->first_name = $input['firstName'];
+			$user->last_name = $input['lastName'];
+			$user->password = Hash::make($input['password']);
 
 			$user->save();
 
-			$user->permissions()->sync($values['permissions']);
+			$user->permissions()->sync($input['permissions']);
 			Session::flash('flashSuccess', 'User successfully created');
 			return Redirect::to('manage/users');
+		}
+	}
+
+	/**
+	 * TODO
+	 * Edits an existing user
+	 */
+	public function editUser(){
+
+		$validator = $this->validateUserInput(Input::all(),false,false);
+
+		if($validator->fails()){
+			return Redirect::to('manage/users')->withErrors($validator)->withInput();
+		}else{
+			echo 'no fail';
 		}
 	}
 
@@ -209,11 +270,16 @@ class UserController extends BaseController {
 	public function restoreUser(){
 
 		$userId = Input::get('userId');
+		$deleted = Input::get('deleted');
 
 		$user = User::onlyTrashed()->find($userId);
 		$user->restore();
 
 		Session::flash('flashSuccess', 'User restored');
+
+		if(isset($deleted) && $deleted){
+			return Redirect::to('manage/users?deleted=1');
+		}
 		return Redirect::to('manage/users');
 	}
 

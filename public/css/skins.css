@@ -89,3 +89,11 @@ label.error{
 .link-style-btn{
 	text-decoration: underline;
 }
+
+.restore{
+	color:green;
+}
+
+.del{
+	color:#EB4A4A;
+}

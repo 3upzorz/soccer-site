@@ -12,7 +12,7 @@ class AddForeignKeys extends Migration {
 	 */
 	public function up()
 	{
-		//TODO uncomment when db out of production
+		//TODO uncomment when db on of production
 		// Schema::table('incidents', function($table){
 		// 	$table->foreign('incident_type_id')->references('id')->on('incident_types');
 		// 	$table->foreign('report_id')->references('id')->on('reports');
