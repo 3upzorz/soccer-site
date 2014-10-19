@@ -202,6 +202,7 @@ class UserController extends BaseController {
 		if($update){
 			$rules['user_id'] = 'required|exists:users,id';
 			$rules['email'] = 'email';
+			$rules['permissions'] = 'required';
 			$values['user_id'] = (isset($input['user_id']) ? $input['user_id'] : null);
 			$values['email'] = (isset($input['email']) ? $input['email'] : null);
 		}
@@ -271,8 +272,9 @@ class UserController extends BaseController {
 		$user = User::findOrFail($userId);
 		$changed = false;
 
+		//for every input field
 		foreach ($input as $key => $value) {
-			//if field exists
+			//check field exists
 			if(isset($user->$key)){
 				if($value === ""){
 					$value = null;
@@ -285,67 +287,43 @@ class UserController extends BaseController {
 			}
 		}
 
-		// if(isset($input['first_name']) && $input['first_name']){
-		// 	$user->first_name = $input['first_name'];
-		// 	$changed = true;
+		if(isset($input['permissions'])){
+			$user->permissions()->sync($input['permissions']);
+		}
+
+		//create 2 arrays indexed by the permission id	
+		// $inputPermissionArr = array();
+		// $userPermissionArr = array();
+
+		// foreach ($input['permissions'] as $permission) {
+		// 	$inputPermissionArr[(int)$permission] = true;
 		// }
 
-		// if(isset($input['last_name']) && $input['last_name']){
-		// 	$user->last_name = $input['last_name'];
-		// 	$changed = true;
+		// foreach ($user->permissions as $userPermission) {
+		// 	$userPermissionArr[(int)$userPermission->id] = true;
 		// }
 
-		// if(isset($input['email']) && $input['email']){
-		// 	$user->email = $input['email'];
-		// 	$changed = true;
+		// //loop through all the permissions to remove the permissions that have been unchecked
+		// //and add permissions that have been checked
+		// foreach ($input['permissions'] as $permission) {
+
+		// 	$permissionId = (int) $permission;
+		// 	//if it exists in the input, but not in the user
+		// 	if(isset($inputPermissionArr[$permissionId]) && !isset($userPermissionArr[$permissionId])){
+		// 		//add permission
+		// 		$user->permissions()->attach($permissionId);
+		// 	}
+		// 	//if it exists in the user, but not the input
+		// 	elseif(!isset($inputPermissionArr[$permissionId]) && isset($userPermissionArr[$permissionId])){
+		// 		//remove permission
+		// 		$user->permissions()->detach($permissionId);
+		// 	}
+		// 	//else the permission exists in both
+		// 	else{
+		// 		//so we don't do anything!
+		// 	}
 		// }
 
-		// if(isset($input['phone']) && $input['phone']){
-		// 	$user->phone = $input['phone'];
-		// 	$changed = true;
-		// }
-
-		// if(isset($input['alt_phone']) && $input['alt_phone']){
-		// 	$user->alt_phone = $input['alt_phone'];
-		// 	$changed = true;
-		// }
-
-		// if(isset($input['notes']) && $input['notes']){
-		// 	$user->notes = $input['notes'];
-		// 	$changed = true;
-		// }
-
-		// if(isset($input['address_line_1']) && $input['address_line_1']){
-		// 	$user->address_line_1 = $input['address_line_1'];
-		// 	$changed = true;
-		// }
-
-		// if(isset($input['address_line_2']) && $input['address_line_2']){
-		// 	$user->address_line_2 = $input['address_line_2'];
-		// 	$changed = true;
-		// }
-
-		// if(isset($input['city']) && $input['city']){
-		// 	$user->city = $input['city'];
-		// 	$changed = true;
-		// }
-
-		// if(isset($input['province']) && $input['province']){
-		// 	$user->province = $input['province'];
-		// 	$changed = true;
-		// }
-
-		// if(isset($input['country']) && $input['country']){
-		// 	$user->country = $input['country'];
-		// 	$changed = true;
-		// }
-
-		// if(isset($input['postal_code']) && $input['postal_code']){
-		// 	$user->postal_code = $input['postal_code'];
-		// 	$changed = true;
-		// }
-
-		//TODO update permissions
 
 		//if something was changed, save the user
 		if($changed){
