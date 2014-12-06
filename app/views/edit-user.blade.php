@@ -19,6 +19,7 @@
 <input type="hidden" name="user_id" value="{{$user->id}}" />
 <div class="col-md-12">
 	<h1>Edit User</h1>
+	<?php echo link_to_route('user_management_panel', '&laquo; Back to Panel'); ?>
 	<?php 
 		$flashSuccess = Session::get('flashSuccess');
 		$flashError = Session::get('flashError');

@@ -29,10 +29,10 @@
 			</div>
 			<div id="game-report-navbar-collapse" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li>{{HTML::link('/report/create', 'Create Report')}}</li>
+					<!-- <li>{{HTML::link('/report/create', 'Create Report')}}</li> -->
 					@if(Auth::user()->user_type_id <= 2)
-						<li>{{HTML::link('/report/search', 'Search Reports')}}</li>
-						<li>{{HTML::link('/user/add', 'Add User')}}</li>
+						<!-- <li>{{HTML::link('/report/search', 'Search Reports')}}</li>
+						<li>{{HTML::link('/user/add', 'Add User')}}</li> -->
 					@endif
 					<li>{{HTML::link('/logout', 'Logout')}}</li>
 				</ul>
