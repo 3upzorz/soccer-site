@@ -31,13 +31,17 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $guarded = array('username', 'password');
 
-
+	/**
+	 * Define the relationship between the User model and the UserPermissionType Model
+	 */
 	public function permissions(){
 		return $this->belongsToMany("UserPermissionType", 'user_permissions');
 	}
 
+	/**
+	 * Define the relationship between the User model and the Report Model
+	 */
 	public function reports(){
 		return $this->hasMany("Report","user_id");
 	}
-
 }

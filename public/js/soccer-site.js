@@ -228,6 +228,125 @@ $(function(){
 		}
 	});
 
+	//
+	$('.view-user-link').click(function(e){
+		e.preventDefault();
+
+		var userId = $(this).data('user-id');
+
+		$.ajax({
+			url:'../user/get',
+			method:'post',
+			data:{
+				userId:userId
+			}
+		}).done(function(user){
+			//TODO populate user view modal
+			console.log(user);
+			populateViewUserModal(user.profile,user.permissions);
+		}).fail(function(){
+			console.log('error');
+		});
+	});
+
+	/**
+	 * Populates the user view modal with data from the user
+	 */
+	function populateViewUserModal(user,permissions){
+		//set the title
+		$('#view-user-modal-title').html(user.username);
+
+		//gen the html for the user profile info
+		//full name
+		var fullName = user.first_name + " ";
+		if(user.preferred_name){
+			fullName += "(" + user.preferred_name + ") ";
+		}
+		if(user.middle_name){
+			fullName += user.middle_name + " ";
+		}
+		fullName += user.last_name;
+		$('#view-full-name').html(genProfileElementHtml('Full Name', fullName));
+		//phone numbers
+		$('#view-phone-number').html(genProfileElementHtml('Phone Number', user.phone));
+		$('#view-alt-phone-number').html(genProfileElementHtml('Alt Phone Number', user.alt_phone));
+		//email
+		$('#view-email').html(genProfileElementHtml('Email', user.email));
+		//address lines
+		var address = genProfileElementHtml('Address', user.address_line_1);
+		if(user.address_line_2){
+			address += genProfileElementHtml(null, user.address_line_2);
+		}
+		address += genProfileElementHtml(null, [user.city, user.postal_code]);
+		$('#view-address').html(address);
+		$('#view-notes').html(genProfileElementHtml('Notes', user.notes));
+
+		//gen the html for the user permissions
+		if(permissions && permissions.length > 0){
+			var permissionsHtml = "<ul class='permission-list'>";
+			for(var i = 0; i < permissions.length; i++){
+				permissionsHtml +=  "<li>" +
+										"<label>" +
+											"<input class='permission-check' name='permissions[]' value="+permissions[i].id+" type='checkbox' checked disabled> " +permissions[i].name+
+										"</label>" +
+									"</li>";
+			}
+			permissionsHtml += "</ul>";
+			$('#view-permissions').html(permissionsHtml);
+		}
+	}
+
+	/**
+	 * Generates html based for the user profile
+	 */
+	function genProfileElementHtml(label,text,joiner){
+		var html = "";
+		var joined = "";
+		if(label){
+			html +=  "<label>" + label + "</label>";	
+		}
+		
+		html += "<p>";
+		if(text){
+			//if the text being passed is an array
+			if(typeof text === 'object'){
+				if(joiner){
+					joined += text.join(joiner + ' ');
+				}else{
+					joined += text.join(', ');
+				}
+				html += joined;
+			}else{
+				html += text;
+			}
+		}else{
+			html += "N/A";
+		}
+		html += "</p>";
+
+		if(joined == ', ' || joined == joiner + ' '){
+			html = "";
+		}
+
+		return html;
+	}
+
+	/**
+	 * prettifies an object key for display
+	 */
+	function prettifyKey(key){
+		console.log(key);
+		var prettified = key.replace('_', ' ');
+		return toTitleCase(prettified);
+	}
+
+	/**
+	 * capitalizes each word in a string
+	 */
+	function toTitleCase(str){
+	    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+	}
+
 /**
  * END USER MANAGEMENT PANEL
  */

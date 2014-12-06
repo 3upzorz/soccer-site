@@ -62,7 +62,7 @@ class UserController extends BaseController {
 			return Redirect::route('index');
 		}
 		else{
-			return View::make('login')->with('flashNotice', 'Email/Password incorrect');
+			return View::make('login')->with('flashError', 'Username/Password incorrect');
 		}
 
 	}
@@ -340,5 +340,41 @@ class UserController extends BaseController {
 			return Redirect::to('manage/users?deleted=1');
 		}
 		return Redirect::to('manage/users');
+	}
+
+	/**
+	 * Get and return the info of a user
+	 */
+	public function getViewableUser(){
+
+		$userId = Input::get('userId');
+
+		if(isset($userId) && $userId){
+
+			$user = User::find($userId);
+			$userArray = array(
+				'profile' => $user->toArray(),
+				'permissions' => $user->permissions()->get()->toArray()
+			);
+			return Response::json($userArray);
+
+		}else{
+
+			return Response::json(array(
+				'fail' => true,
+				'errors' => array("invalid user id")
+			));
+		}
+	}
+
+	/**
+	 * TODO remove
+	 * Random test function
+	 */
+	public function test(){
+		$user = User::find(22);
+		echo '<pre>';
+		var_dump($user->permissions()->get()->toArray());
+		echo '</pre>';
 	}
 }

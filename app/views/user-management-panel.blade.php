@@ -77,100 +77,36 @@
 </div>
 <!-- END ADD USER MODAL -->
 
-<!-- START EDIT USER MODAL -->
-<div id="edit-user-modal" class="modal fade" tab-index="-1" role="dialog" aria-labelledby="editUserModal" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
+<!-- START VIEW USER MODAL -->
+<div id="view-user-modal" class="modal fade" tab-index="-1" role="dialog" aria-labelledby="viewUserModal" aria-hidden="true">
+	<div class="modal-dialog modal-md">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-				<h2 class="modal-title" id="edit-user-modal-title">Edit User</h2>
+				<h2 class="modal-title" id="view-user-modal-title"></h2>
 			</div>
-			{{Form::open(
-				array(
-					'id'   => 'edit-user-form',
-					'url'  => 'user/edit',
-					'role' => 'form'
-				)
-			)}}
 			<div class="modal-body">
 				<h3>Profile</h3>
 				<div class="row">
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label for="edit-first-name">First Name</label>
-							<input id="edit-first-name" class="form-control" type="text" name="first_name" placeholder="Enter First Name">
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label for="edit-last-name">Last Name</label>
-							<input id="edit-last-name" class="form-control" type="text" name="last_name" placeholder="Enter Last Name">
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label for="edit-phone-number">Phone Number</label>
-							<input id="edit-phone-number" class="form-control" type="text" name="phoneNumber" placeholder="Enter Phone Number">
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label for="edit-phone-number-alt">Alt. Phone Number</label>
-							<input id="edit-phone-number-alt" class="form-control" type="text" name="phoneNumberAlt" placeholder="Enter Phone Number">
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="edit-email">Email</label>
-					<input id="edit-email" class="form-control" type="email" name="email" placeholder="Enter email">
-				</div>
-				<h3>Address</h3>
-				<div class="form-group">
-					<label for="edit-address-line-1">Address Line 1</label>
-					<input id="edit-address-line-1" class="form-control" type="text" name="email" placeholder="Enter street address">
-				</div>
-				<div class="form-group">
-					<label for="edit-address-line-2">Address Line 2 (Optional)</label>
-					<input id="edit-address-line-2" class="form-control" type="text" name="email" placeholder="Enter additional address info, e.g. apt number">
-				</div>
-				<div class="row">
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label for="edit-phone-number-alt">Alt. Phone Number</label>
-							<input id="edit-phone-number-alt" class="form-control" type="text" name="phoneNumberAlt" placeholder="Enter Phone Number">
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="form-group">
-							<label for="edit-postal-code">Postal Code</label>
-							<input id="edit-postal-code" class="form-control" type="text" name="postalCode" placeholder="Enter Postal Code e.g. V3C2B3">
-						</div>
-					</div>
+					<div id="view-full-name" class="col-md-12"></div>
+					<div id="view-phone-number" class="col-sm-6"></div>
+					<div id="view-alt-phone-number" class="col-sm-6"></div>
+					<div id="view-email" class="col-md-12"></div>
+					<div id="view-address" class="col-md-12"></div>
+					<div id="view-notes" class="col-md-12"></div>
 				</div>
 				<h3>Permissions</h3>
-				<div class="form-group">
-					<ul class="permission-list">
-						@foreach($permissions as $permission)
-						<li>
-							<label>
-								<input class="edit-permission-check" name="permissions[]" value="{{$permission->id}}" type="checkbox"> {{$permission->name}}
-							</label>
-						</li>
-						@endforeach
-					</ul>
+				<div class="row">
+					<div id="view-permissions" class="col-md-12"></div>
 				</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button class="btn btn-success" form="edit-user-form" type="submit">Save User</button>
 			</div>
-			{{Form::close()}}
 		</div>
 	</div>
 </div>
-<!-- END EDIT USER MODAL -->
+<!-- END VIEW USER MODAL -->
 
 <div class="col-md-12">
 	<h1>Manage Users</h1>
@@ -293,7 +229,7 @@
 						@endforeach
 						</ul>
 					</td>
-					<td><a href="#" class="clickable">View</a></td>
+					<td><a href="#" class="clickable view-user-link" data-user-id="<?php echo $user->id ?>" data-toggle="modal" data-target="#view-user-modal">View</a></td>
 					<td>
 						<ul class="icon-list">
 							<!-- if looking at deleted users, display a button to restore that user -->

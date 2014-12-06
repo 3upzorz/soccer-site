@@ -40,16 +40,16 @@ Route::group(array('before' => 'isAdmin'),function(){
 	Route::post('user/delete', array('as' => 'delete_user', 'uses' => 'UserController@deleteUser'));
 	Route::post('user/restore', array('as' => 'restore_user', 'uses' => 'UserController@restoreUser'));
 
-	Route::get('manage/users/', array('as' => 'user_management_panel', 'uses' => 'UserController@showManagementPanel'));
+	Route::get('manage/users', array('as' => 'user_management_panel', 'uses' => 'UserController@showManagementPanel'));
 
 });
 
-
+Route::post('user/get', array('as', 'get_user', 'uses' => 'UserController@getViewableUser'));
 
 Route::get('login', array('as' => 'login_view', 'uses' => 'UserController@loginView'));
 Route::post('login', array('as' => 'login', 'uses' => 'UserController@login'));
 
 Route::get('logout', array('as' => 'logout', 'uses' => 'UserController@logout'));
 
-Route::get('test', array('uses' => 'UserController@test'));
-
+//TODO remove
+Route::get('user/test', array('uses' => 'UserController@test'));
